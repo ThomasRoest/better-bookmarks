@@ -50,7 +50,7 @@ type Props = {
   fetchTags: Function,
   setFilter: Function,
   tags: Array<Object>,
-  filters: Array<Object> // add filtertype
+  filters: Object // add filtertype
 };
 
 class Sidebar extends React.Component<Props> {
