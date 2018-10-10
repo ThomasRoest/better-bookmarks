@@ -1,0 +1,8 @@
+.label-export {
+  font-size: 0.8em;
+}
+
+.label-export:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
