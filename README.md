@@ -2,12 +2,8 @@
 
 A self-hosted bookmark manager made with React (create react app), Redux and Firebase (Cloud Firestore and authentication)
 
-<video controls muted src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-11+at+10.04+AM.mov"
-    width="600" height="400">
-Sorry, your browser doesn't support embedded videos.
-</video>
-
-<img src="https://s3-eu-west-1.amazonaws.com/github-images123/better-bookmarks-screenshot2.png" />
+<img 
+src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-11+at+11.39+AM.gif" />
 
 ### Setup
 
