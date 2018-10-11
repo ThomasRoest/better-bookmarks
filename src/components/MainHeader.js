@@ -95,7 +95,7 @@ const MainHeader = ({
         </span>
         <input
           type="search"
-          placeholder="Search..."
+          placeholder="Search...   Use '!' to filter by tag. e.g. !css"
           value={searchTerm}
           onChange={handleSearchTermChange}
         />

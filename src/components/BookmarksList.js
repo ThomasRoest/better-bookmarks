@@ -23,18 +23,23 @@ class BookmarksList extends React.Component<Props> {
   };
 
   filterBySearchTerm = item => {
-    return (
-      `${item.title} ${item.url}`
-        .toUpperCase()
-        .indexOf(this.props.searchTerm.toUpperCase()) >= 0
-    );
+    if (this.props.searchTerm.startsWith("!")) {
+      const searchTerm = this.props.searchTerm.substring(1);
+      return `${item.tag}`.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0;
+    } else {
+      return (
+        `${item.title} ${item.url}`
+          .toUpperCase()
+          .indexOf(this.props.searchTerm.toUpperCase()) >= 0
+      );
+    }
   };
 
   render() {
     const { bookmarks, deleteBookmark, searchTerm, tagFilter } = this.props;
     let filteredList = [];
 
-    if (searchTerm.length > 1) {
+    if (searchTerm.length >= 1) {
       filteredList = bookmarks.filter(this.filterBySearchTerm);
     } else if (tagFilter !== "default") {
       filteredList = bookmarks.filter(this.filterByTag);
@@ -44,7 +49,6 @@ class BookmarksList extends React.Component<Props> {
 
     return (
       <StyledList>
-        {/* {tagFilter} | {searchTerm} */}
         {filteredList.map(item => (
           <BookmarkListItem
             key={item.id}
