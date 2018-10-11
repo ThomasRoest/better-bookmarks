@@ -61,8 +61,8 @@ class NewBookmarkForm extends Component<Props, State> {
   handleSubmit = event => {
     event.preventDefault();
     let errors = {};
-    if (this.state.title === "") errors.title = "Can't be empty";
-    if (this.state.url === "") errors.url = "Can't be empty";
+    if (this.state.title === "") errors.title = "can't be empty";
+    if (this.state.url === "") errors.url = "can't be empty";
     this.setState({ errors });
     const isValid = Object.keys(errors).length === 0;
 
@@ -78,12 +78,14 @@ class NewBookmarkForm extends Component<Props, State> {
   };
 
   render() {
-    // let errors = Object.values(this.state.errors);
-
     return (
       <StyledForm onSubmit={this.handleSubmit}>
         <h3>Add new Bookmark</h3>
-        <div>{JSON.stringify(this.state.errors)}</div>
+        <ul>
+          {Object.entries(this.state.errors).map(item => {
+            return <li key={item[0]}>{`${item[0]} ${item[1]}`}</li>;
+          })}
+        </ul>
 
         <div>
           <label htmlFor="url">url</label>
