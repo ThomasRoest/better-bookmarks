@@ -8,19 +8,8 @@ import { fetchTags, deleteTag } from "../actions/tags";
 import { setFilter } from "../actions/filters";
 import styled from "styled-components";
 
-const StyledTagList = styled.ul`
-  list-style-type: none;
-
-  li {
-    background-color: white;
-    list-style-type: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    box-shadow: 0 1px 0 #ccc;
-    border-radius: 3px;
-  }
+const StyledTagList = styled.div`
+  padding: 20px;
 `;
 
 type Props = {
@@ -41,25 +30,36 @@ class TagsPage extends Component<Props> {
       <StyledTagList>
         <h2>Tags</h2>
         <NewTagForm />
-        {this.props.tags.map(tag => (
-          <li key={tag.id}>
-            <Link
-              to="/"
-              onClick={() => this.props.setFilter(tag.title)}
-              className="btn btn-sm"
-            >
-              {tag.title}
-            </Link>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>title</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.tags.map(tag => (
+              <tr>
+                <td>
+                  <Link to="/" onClick={() => this.props.setFilter(tag.title)}>
+                    {tag.title}
+                  </Link>
+                </td>
 
-            <button
-              className="btn btn-sm btn-error"
-              onClick={() => this.props.deleteTag(tag.id, this.props.auth.uid)}
-            >
-              delete
-            </button>
-          </li>
-        ))}
-        <br />
+                <td>
+                  <button
+                    className="btn btn-sm btn-error"
+                    onClick={() =>
+                      this.props.deleteTag(tag.id, this.props.auth.uid)
+                    }
+                  >
+                    delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </StyledTagList>
     );
   }

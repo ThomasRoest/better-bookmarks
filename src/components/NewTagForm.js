@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createTag } from "../actions/tags";
+import "../css/custom.css";
 
 class NewTagForm extends Component {
   state = {
@@ -25,9 +26,8 @@ class NewTagForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="title">title</label>
-        <div className="form-group">
+      <form onSubmit={this.handleSubmit} className="newtag-form">
+        <div className="input-group">
           <input
             placeholder="add new Tag...."
             type="text"
@@ -35,9 +35,9 @@ class NewTagForm extends Component {
             value={this.state.title}
             onChange={this.handleChange}
           />
-        </div>
-        <div className="form-group">
-          <input type="submit" value="submit" className="btn" />
+          <button type="submit" className="btn btn-primary input-group-btn">
+            Submit
+          </button>
         </div>
       </form>
     );

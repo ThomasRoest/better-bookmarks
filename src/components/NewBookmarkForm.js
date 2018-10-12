@@ -65,7 +65,6 @@ class NewBookmarkForm extends Component<Props, State> {
     if (this.state.url === "") errors.url = "can't be empty";
     this.setState({ errors });
     const isValid = Object.keys(errors).length === 0;
-
     if (isValid) {
       const { title, url, tag, userId } = this.state;
       const createdAt = Math.floor(Date.now() / 1000);

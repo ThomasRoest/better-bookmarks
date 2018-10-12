@@ -6,3 +6,10 @@
   background-color: lightgrey;
   cursor: pointer;
 }
+
+.newtag-form {
+  max-width: 400px;
+  margin-bottom: 50px;
+  /* padding: 20px; */
+  /* background-color: lightblue; */
+}
