@@ -2,8 +2,7 @@
 
 A self-hosted bookmark manager made with React (create react app), Redux and Firebase (Cloud Firestore and authentication)
 
-<img 
-src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-11+at+11.39+AM.gif" />
+<img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-17+at+12.12+PM.gif" />
 
 ### Setup
 
