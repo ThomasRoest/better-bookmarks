@@ -3,7 +3,7 @@ const axios = require("axios");
 
 // const { JSDOM } = jsdom;
 
-// const URL = "https://github.com";
+const URL = "https://github.com";
 
 exports.handler = async (event, context) => {
   const response = await axios.get(URL);
