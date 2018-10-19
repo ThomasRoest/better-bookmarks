@@ -34,6 +34,7 @@ const Application = ({ auth, signIn }) => (
           <MainHeader />
           <FlexContainer>
             <Sidebar />
+
             <Main>
               <Switch>
                 <Route exact path="/" component={BookmarksPage} />
