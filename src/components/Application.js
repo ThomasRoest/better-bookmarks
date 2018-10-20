@@ -39,7 +39,7 @@ const Application = ({ auth, signIn }) => (
             <Main>
               <Switch>
                 <Route exact path="/" component={BookmarksPage} />
-                <Route exact path="/hellothere" component={Netlify} />
+                <Route exact path="/netlify-test" component={Netlify} />
                 <Route
                   exact
                   path="/bookmarks/new"

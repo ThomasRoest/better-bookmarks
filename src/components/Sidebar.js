@@ -63,6 +63,9 @@ class Sidebar extends React.Component<Props> {
       <StyledSidebar>
         <ul>
           <li>
+            <Link to="/netlify-test">netlify-test</Link>
+          </li>
+          <li>
             <Link to="/">Bookmarks</Link>
           </li>
           <li>
