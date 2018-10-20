@@ -1,35 +1,52 @@
+//@flow
+
 import React, { Component } from "react";
 import axios from "axios";
 
 class Netlify extends Component {
-  componentDidMount() {}
-
-  // https://better-bookmarks-thomas.netlify.com/
-
-  getData = () => {
-    let url;
-    if (process.env.NODE_ENV === "production") {
-      console.log(process.env.NODE_ENV);
-      url = "/.netlify/functions/hello";
-    } else {
-      console.log(process.env.NODE_ENV);
-      url = "http://localhost:9000/hello";
-    }
-    axios
-      .get(url)
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-      .then(function() {});
+  state = {
+    data: {},
+    value: ""
   };
+
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
+
+  handleSubmit = async event => {
+    const lambdaEndpoint =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:9000/hello"
+        : "/.netlify/functions/hello";
+
+    event.preventDefault();
+
+    const obj = {
+      url: this.state.value
+    };
+
+    const response = await axios.post(lambdaEndpoint, JSON.stringify(obj));
+    console.log(response);
+    this.setState({ value: "", data: response.data });
+  };
+
   render() {
     return (
-      <p>
-        <button onClick={this.getData}>get data</button>
-      </p>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="value">value</label>
+          <input
+            type="text"
+            name="value"
+            onChange={this.handleChange}
+            value={this.state.value}
+          />
+          <input type="submit" value="save" />
+        </form>
+        <pre>
+          <code>{JSON.stringify(this.state.data)}</code>
+        </pre>
+      </div>
     );
   }
 }
