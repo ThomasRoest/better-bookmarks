@@ -13,6 +13,24 @@ class Netlify extends Component {
     this.setState({ value: event.target.value });
   };
 
+  handleBlur = async event => {
+    console.log("well then");
+    const lambdaEndpoint =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:9000/hello"
+        : "/.netlify/functions/hello";
+
+    event.preventDefault();
+
+    const obj = {
+      url: this.state.value
+    };
+
+    const response = await axios.post(lambdaEndpoint, JSON.stringify(obj));
+    console.log(response);
+    this.setState({ value: "", data: response.data });
+  };
+
   handleSubmit = async event => {
     const lambdaEndpoint =
       process.env.NODE_ENV === "development"
@@ -39,6 +57,7 @@ class Netlify extends Component {
             type="text"
             name="value"
             onChange={this.handleChange}
+            onBlur={this.handleBlur}
             value={this.state.value}
           />
           <input type="submit" value="save" />

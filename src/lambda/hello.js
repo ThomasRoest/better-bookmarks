@@ -1,17 +1,11 @@
 const axios = require("axios");
-// const jsdom = require("jsdom");
-
-// const { JSDOM } = jsdom;
-
-const URL = "https://jsonplaceholder.typicode.com/posts/1";
+const cheerio = require("cheerio");
 
 exports.handler = async (event, context) => {
-  const response = await axios.get(URL);
-  // const dom = new JSDOM(response.data);
-  // // // console.log(response);
-  // const title = dom.window.document.querySelector("title").textContent;
-  console.log(event.body);
-  // const data = JSON.parse(event.body);
+  const data = JSON.parse(event.body);
+  const response = await axios.get(data.url);
+  const $ = cheerio.load(response.data);
+  const pageTitle = $("title").text();
 
   return {
     headers: {
@@ -19,6 +13,6 @@ exports.handler = async (event, context) => {
       "Access-Control-Allow-Origin": "*"
     },
     statusCode: 200,
-    body: JSON.stringify({ data: response.data })
+    body: JSON.stringify({ data: pageTitle })
   };
 };
