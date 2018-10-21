@@ -20,7 +20,7 @@ class Netlify extends Component {
         ? "http://localhost:9000/hello"
         : "/.netlify/functions/hello";
 
-    event.preventDefault();
+    // event.preventDefault();
 
     const obj = {
       url: this.state.value
