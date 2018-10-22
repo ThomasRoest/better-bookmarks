@@ -1,6 +1,7 @@
 //@flow
 
 import React, { Component } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import { createBookmark } from "../actions/bookmarks";
 import { fetchTags } from "../actions/tags";
@@ -31,7 +32,8 @@ type State = {
   url: string,
   tag: string,
   userId: string,
-  errors: Object
+  errors: Object,
+  isLoading: boolean
 };
 
 type Props = {
@@ -47,7 +49,8 @@ class NewBookmarkForm extends Component<Props, State> {
     url: "",
     tag: "",
     userId: this.props.auth.uid,
-    errors: {}
+    errors: {},
+    isLoading: false
   };
 
   componentDidMount() {
@@ -76,14 +79,52 @@ class NewBookmarkForm extends Component<Props, State> {
     }
   };
 
+  // const lambdaEndpoint =
+  //     process.env.NODE_ENV === "development"
+  //       ? "http://localhost:9000/hello"
+  //       : "/.netlify/functions/hello";
+
+  getTitle = async () => {
+    // endpoint --> SET IN THIS FILE / NOT ENV
+    // cors?
+    // errors in form handling
+    this.setState({ isLoading: true });
+
+    const obj = {
+      url: this.state.url
+    };
+
+    try {
+      let response = await axios.post(
+        process.env.REACT_APP_LAMBDA_ENDPOINT,
+        JSON.stringify(obj)
+      );
+      this.setState({ title: response.data.pageTitle, isLoading: false });
+    } catch (error) {
+      console.log("ERROR: " + error);
+      this.setState({
+        isLoading: false,
+        errors: { ...this.state.errors, title: "Could not get title" }
+      });
+    }
+  };
+
   render() {
     return (
       <StyledForm onSubmit={this.handleSubmit}>
+        {this.state.isLoading && (
+          <div>
+            getting title....
+            <div className="loading loading-lg" />
+          </div>
+        )}
         <h3>Add new Bookmark</h3>
         <ul>
-          {Object.entries(this.state.errors).map(item => {
+          {/* {this.state.errors.length && JSON.stringify(this.state.errors)} */}
+          {/* {JSON.stringify(this.state.errors)} */}
+          {/* {Object.entries(this.state.errors).map(item => {
             return <li key={item[0]}>{`${item[0]} ${item[1]}`}</li>;
-          })}
+          })} */}
         </ul>
 
         <div>
@@ -93,6 +134,7 @@ class NewBookmarkForm extends Component<Props, State> {
             name="url"
             value={this.state.url}
             onChange={this.handleChange}
+            onBlur={this.getTitle}
             type="text"
             id="url"
             placeholder="add url.."

@@ -13,7 +13,6 @@ import MainHeader from "./MainHeader";
 import TagsPage from "./TagsPage";
 import BookmarksPage from "./BookmarksPage";
 import Sidebar from "./Sidebar";
-import Netlify from "./Netlify";
 
 const FlexContainer = styled.div`
   @media (min-width: 579px) {
@@ -39,7 +38,6 @@ const Application = ({ auth, signIn }) => (
             <Main>
               <Switch>
                 <Route exact path="/" component={BookmarksPage} />
-                <Route exact path="/netlify-test" component={Netlify} />
                 <Route
                   exact
                   path="/bookmarks/new"
