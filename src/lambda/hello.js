@@ -13,6 +13,6 @@ exports.handler = async (event, context) => {
       "Access-Control-Allow-Origin": "*"
     },
     statusCode: 200,
-    body: JSON.stringify({ data: pageTitle })
+    body: JSON.stringify({ pageTitle })
   };
 };
