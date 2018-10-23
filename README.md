@@ -2,7 +2,7 @@
 
 A self-hosted bookmark manager made with React (create react app), Redux and Firebase (Cloud Firestore and authentication)
 
-<img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-17+at+12.12+PM.gif" />
+<img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-23+at+10.02+AM.gif" />
 
 ### Setup
 
@@ -66,8 +66,12 @@ service cloud.firestore {
 
 8. That's it for the Firebase setup. You can now run `yarn start` to run the application locally.
 
-### Deploying
+### Netlify Functions & Deploying
 
-you can run `yarn build` to create a production build, Which you can then host anywhere you like (Netlify (recommended) , Firebase hosting, GH pages, Amazon S3 etc.)
+Run `yarn build` to create a production build for this project.
+
+This projects uses netlify functions, see [src/lambda/get-title.js](https://github.com/ThomasRoest/better-bookmarks/blob/master/src/lambda/get-title.js) to get page titles from url's.
+
+It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Which will then create the build from src/lambda, as configured in `netlify.toml`
 
 Make sure you update the authorized domains for authentication in the firebase console (authentication tab)

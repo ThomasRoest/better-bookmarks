@@ -76,7 +76,6 @@ class NewBookmarkForm extends Component<Props, State> {
 
   handleSubmit = event => {
     event.preventDefault();
-
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
