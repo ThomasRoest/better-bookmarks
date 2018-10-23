@@ -13,3 +13,7 @@
   /* padding: 20px; */
   /* background-color: lightblue; */
 }
+
+.form-error {
+  color: #e85600 !important;
+}

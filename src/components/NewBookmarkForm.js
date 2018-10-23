@@ -7,6 +7,9 @@ import { createBookmark } from "../actions/bookmarks";
 import { fetchTags } from "../actions/tags";
 import styled from "styled-components";
 
+const lambdaDev = "http://localhost:9000/get-title";
+const lambdaProd = "/.netlify/functions/get-title";
+
 const StyledForm = styled.form`
   padding: 1.5rem;
   max-width: 600px;
@@ -61,14 +64,24 @@ class NewBookmarkForm extends Component<Props, State> {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  validate = () => {
+    const errors = {};
+    const { title, url, tag } = this.state;
+    if (title === "") errors.title = "title is required";
+    if (url === "") errors.url = "url is required";
+    if (tag === "") errors.tag = "tag is required";
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    let errors = {};
-    if (this.state.title === "") errors.title = "can't be empty";
-    if (this.state.url === "") errors.url = "can't be empty";
-    this.setState({ errors });
-    const isValid = Object.keys(errors).length === 0;
-    if (isValid) {
+
+    const errors = this.validate();
+    this.setState({ errors: errors || {} });
+    if (errors) return;
+
+    if (!errors) {
       const { title, url, tag, userId } = this.state;
       const createdAt = Math.floor(Date.now() / 1000);
       this.props.createBookmark(
@@ -79,32 +92,24 @@ class NewBookmarkForm extends Component<Props, State> {
     }
   };
 
-  // const lambdaEndpoint =
-  //     process.env.NODE_ENV === "development"
-  //       ? "http://localhost:9000/hello"
-  //       : "/.netlify/functions/hello";
-
   getTitle = async () => {
-    // endpoint --> SET IN THIS FILE / NOT ENV
     // cors?
-    // errors in form handling
     this.setState({ isLoading: true });
 
     const obj = {
       url: this.state.url
     };
 
+    const endpoint =
+      process.env.NODE_ENV === "development" ? lambdaDev : lambdaProd;
+
     try {
-      let response = await axios.post(
-        process.env.REACT_APP_LAMBDA_ENDPOINT,
-        JSON.stringify(obj)
-      );
+      let response = await axios.post(endpoint, JSON.stringify(obj));
       this.setState({ title: response.data.pageTitle, isLoading: false });
     } catch (error) {
       console.log("ERROR: " + error);
       this.setState({
-        isLoading: false,
-        errors: { ...this.state.errors, title: "Could not get title" }
+        isLoading: false
       });
     }
   };
@@ -119,16 +124,11 @@ class NewBookmarkForm extends Component<Props, State> {
           </div>
         )}
         <h3>Add new Bookmark</h3>
-        <ul>
-          {/* {this.state.errors.length && JSON.stringify(this.state.errors)} */}
-          {/* {JSON.stringify(this.state.errors)} */}
-          {/* {Object.entries(this.state.errors).map(item => {
-            return <li key={item[0]}>{`${item[0]} ${item[1]}`}</li>;
-          })} */}
-        </ul>
-
         <div>
           <label htmlFor="url">url</label>
+          {this.state.errors.url && (
+            <p className="form-error">{this.state.errors.url}</p>
+          )}
           <input
             className="form-input"
             name="url"
@@ -142,6 +142,9 @@ class NewBookmarkForm extends Component<Props, State> {
         </div>
         <div className="form-group">
           <label htmlFor="title">title</label>
+          {this.state.errors.title && (
+            <p className="form-error">{this.state.errors.title}</p>
+          )}
           <input
             className="form-input"
             name="title"
@@ -154,6 +157,9 @@ class NewBookmarkForm extends Component<Props, State> {
         </div>
         <div>
           <label htmlFor="tag">tag</label>
+          {this.state.errors.tag && (
+            <p className="form-error">{this.state.errors.tag}</p>
+          )}
           <select
             className="form-select"
             name="tag"
