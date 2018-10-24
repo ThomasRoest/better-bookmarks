@@ -78,6 +78,6 @@ Make sure you update the authorized domains for authentication in the firebase c
 
 ## Screenshots
 
-![Timesheets screen](/public/screenshot_home.png)
+![HOME](/public/screenshot_home.png)
 
 > bookmarks
