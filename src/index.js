@@ -3,12 +3,11 @@ import ReactDOM from "react-dom";
 import { applyMiddleware, compose, createStore } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-// import logger from "redux-logger";
-
 import reducer from "./reducers";
 import initialState from "./initial-state";
 import Application from "./components/Application";
-import "./css/spectre.min.css";
+import "spectre.css/dist/spectre.min.css";
+import "spectre.css/dist/spectre-icons.css";
 import "./css/custom.css";
 
 import { startListeningToAuthChanges } from "./actions/auth";

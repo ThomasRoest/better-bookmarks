@@ -9,20 +9,20 @@ const StyledListItem = styled.li`
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
   padding: 10px;
-
   box-shadow: 0 1px 0 #ccc;
-  /* border-radius: 3px; */
-  /* overflow-wrap: break-word;
-  word-wrap: break-word; */
+  .icon-more-vert {
+    padding: 1em;
+    transition: background-color 0.3s ease;
+    &:hover {
+      background-color: lightgrey;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  }
 `;
 
 const BookmarkInfo = styled.div`
-  /* background: lightblue; */
-  /* flex-basis: 90%; */
-  /* flex: 0 1 90%; */
-  /* width: 100px; */
   overflow: hidden;
   .label {
     font-size: 0.8em;
@@ -70,6 +70,7 @@ class BookmarkListItem extends Component<Props, State> {
               <Link className="btn btn-sm" to={`/bookmarks/${id}`}>
                 Edit
               </Link>
+
               <button
                 className="btn btn-sm btn-error"
                 onClick={() => deleteBookmark(id, userId)}
@@ -90,9 +91,10 @@ class BookmarkListItem extends Component<Props, State> {
               <span className="label label-rounded label-default">{tag}</span>
             </BookmarkInfo>
 
-            <button className="btn btn-sm" onClick={this.handleClick}>
+            <i className="icon icon-more-vert" onClick={this.handleClick} />
+            {/* <button className="icon icon-edit" onClick={this.handleClick}>
               Edit
-            </button>
+            </button> */}
           </React.Fragment>
         )}
       </StyledListItem>
