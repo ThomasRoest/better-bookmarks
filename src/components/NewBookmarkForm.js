@@ -62,7 +62,9 @@ class NewBookmarkForm extends Component<Props, State> {
 
   handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({ [event.target.name]: event.target.value });
-    this.getTitle(event.target.value);
+    if (event.target.name === "url") {
+      this.getTitle(event.target.value);
+    }
   };
 
   validate = () => {
