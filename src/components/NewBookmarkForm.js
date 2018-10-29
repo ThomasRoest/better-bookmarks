@@ -62,6 +62,7 @@ class NewBookmarkForm extends Component<Props, State> {
 
   handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({ [event.target.name]: event.target.value });
+    this.getTitle(event.target.value);
   };
 
   validate = () => {
@@ -91,12 +92,11 @@ class NewBookmarkForm extends Component<Props, State> {
     }
   };
 
-  getTitle = async () => {
-    // cors?
+  getTitle = async url => {
     this.setState({ isLoading: true });
 
     const obj = {
-      url: this.state.url
+      url: url
     };
 
     const endpoint =
@@ -133,7 +133,6 @@ class NewBookmarkForm extends Component<Props, State> {
             name="url"
             value={this.state.url}
             onChange={this.handleChange}
-            onBlur={this.getTitle}
             type="text"
             id="url"
             placeholder="add url.."
