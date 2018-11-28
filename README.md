@@ -72,7 +72,7 @@ Run `yarn build` to create a production build for this project.
 
 This projects uses netlify functions, see [src/lambda/get-title.js](https://github.com/ThomasRoest/better-bookmarks/blob/master/src/lambda/get-title.js) to get page titles from url's.
 
-It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Which will then create the build from src/lambda, as configured in `netlify.toml`
+It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Netlify will then create the build from src/lambda, as configured in `netlify.toml`. The package netlify-lambda allows you to run the function locally with: `yarn start:lambda`.
 
 Make sure you update the authorized domains for authentication in the firebase console (authentication tab)
 
