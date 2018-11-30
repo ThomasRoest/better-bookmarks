@@ -90,6 +90,9 @@ class EditBookmarkForm extends Component<Props, State> {
     // let errors = Object.values(this.state.errors);
     return (
       <StyledForm onSubmit={this.handleSubmit}>
+        <pre>
+          <code>{JSON.stringify(this.state, null, 2)}</code>
+        </pre>
         <h3>Edit bookmark</h3>
         {/* <div>{errors}</div> */}
         <div className="form-group">
