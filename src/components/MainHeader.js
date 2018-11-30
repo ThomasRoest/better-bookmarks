@@ -47,6 +47,10 @@ const HeaderTop = styled.div`
   span.userinfo {
     text-align: center;
     flex: 0 0 10%;
+    .btn-link { 
+      color: lightblue; 
+      &:hover { color: blueviolet;}
+      }
   }
 `;
 
@@ -100,7 +104,7 @@ const MainHeader = ({
           onChange={handleSearchTermChange}
         />
         <span className="userinfo">
-          <button className="btn btn-sm btn-primary" onClick={signOut}>
+          <button className="btn btn-sm btn-link" onClick={signOut}>
             signout
           </button>
         </span>
