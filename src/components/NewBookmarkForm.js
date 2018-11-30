@@ -34,6 +34,7 @@ type State = {
   title: string,
   url: string,
   tag: string,
+  pinned: boolean,
   userId: string,
   errors: Object,
   isLoading: boolean
@@ -51,6 +52,7 @@ class NewBookmarkForm extends Component<Props, State> {
     title: "",
     url: "",
     tag: "",
+    pinned: false,
     userId: this.props.auth.uid,
     errors: {},
     isLoading: false
@@ -61,9 +63,13 @@ class NewBookmarkForm extends Component<Props, State> {
   }
 
   handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    this.setState({ [event.target.name]: event.target.value });
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState({ [event.target.name]: value });
     if (event.target.name === "url") {
-      this.getTitle(event.target.value);
+      this.getTitle(value);
     }
   };
 
@@ -84,10 +90,10 @@ class NewBookmarkForm extends Component<Props, State> {
     if (errors) return;
 
     if (!errors) {
-      const { title, url, tag, userId } = this.state;
+      const { title, url, tag, userId, pinned } = this.state;
       const createdAt = Math.floor(Date.now() / 1000);
       this.props.createBookmark(
-        { title, url, tag, userId, createdAt },
+        { title, url, tag, userId, createdAt, pinned },
         this.props.auth
       );
       this.setState({ title: "", url: "", tag: "" });
@@ -155,6 +161,7 @@ class NewBookmarkForm extends Component<Props, State> {
             placeholder="add title.."
           />
         </div>
+
         <div>
           <label htmlFor="tag">tag</label>
           {this.state.errors.tag && (
@@ -173,6 +180,17 @@ class NewBookmarkForm extends Component<Props, State> {
               </option>
             ))}
           </select>
+        </div>
+        <div className="form-group">
+          <label className="form-checkbox">
+            <input
+              name="pinned"
+              type="checkbox"
+              checked={this.state.pinned}
+              onChange={this.handleChange}
+            />
+            <i className="form-icon" /> Pin to top
+          </label>
         </div>
         <div>
           <br />

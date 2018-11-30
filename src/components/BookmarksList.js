@@ -23,7 +23,7 @@ class BookmarksList extends React.Component<Props> {
   };
 
   filterBySearchTerm = item => {
-    if (this.props.searchTerm.startsWith("!")) {
+    if (this.props.searchTerm.startsWith("#")) {
       const searchTerm = this.props.searchTerm.substring(1);
       return `${item.tag}`.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0;
     } else {
@@ -44,7 +44,9 @@ class BookmarksList extends React.Component<Props> {
     } else if (tagFilter !== "default") {
       filteredList = bookmarks.filter(this.filterByTag);
     } else {
-      filteredList = bookmarks;
+      filteredList = bookmarks.sort((a, b) => {
+        return b.pinned - a.pinned;
+      });
     }
 
     return (

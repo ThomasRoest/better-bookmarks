@@ -1,9 +1,31 @@
 //@flow
 
 import React, { Component } from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
 import { updateBookmark, fetchBookmark } from "../actions/bookmarks";
 import { fetchTags } from "../actions/tags";
+
+const StyledForm = styled.form`
+  padding: 1rem;
+  .form-group.form-group-checkbox {
+    margin: 20px 0 20px 0 !important;
+  }
+  padding: 1.5rem;
+  max-width: 600px;
+  box-shadow: 0px 5px 5px lightgrey;
+  margin: 0 auto 0 auto;
+  .form-input,
+  select {
+    border-radius: 0px;
+    padding-left: 0px;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 1px solid blue;
+    margin-bottom: 20px;
+  }
+`;
 
 type State = {
   id: string,
@@ -11,7 +33,8 @@ type State = {
   url: string,
   tag: string,
   userId: string,
-  errors: Object
+  errors: Object,
+  pinned: boolean
 };
 
 type Props = {
@@ -25,13 +48,13 @@ type Props = {
 };
 
 class EditBookmarkForm extends Component<Props, State> {
-  // use setstate, don't do this?
   state = {
     id: this.props.bookmark ? this.props.bookmark.id : "",
     title: this.props.bookmark ? this.props.bookmark.title : "",
     url: this.props.bookmark ? this.props.bookmark.url : "",
     tag: this.props.bookmark ? this.props.bookmark.tag : "",
     userId: this.props.bookmark ? this.props.bookmark.userId : "",
+    pinned: this.props.bookmark ? this.props.bookmark.pinned : false,
     errors: {}
   };
 
@@ -41,7 +64,11 @@ class EditBookmarkForm extends Component<Props, State> {
   }
 
   handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    this.setState({ [event.target.name]: event.target.value });
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState({ [event.target.name]: value });
   };
 
   handleSubmit = event => {
@@ -53,17 +80,17 @@ class EditBookmarkForm extends Component<Props, State> {
     const isValid = Object.keys(errors).length === 0;
 
     if (isValid) {
-      const { id, title, url, tag, userId } = this.state;
-      this.props.updateBookmark({ id, title, url, tag, userId });
-      this.setState({ title: "", url: "", tag: "" });
+      const { id, title, url, tag, userId, pinned } = this.state;
+      this.props.updateBookmark({ id, title, url, tag, userId, pinned });
+      this.setState({ title: "", url: "", tag: "", pinned: false });
     }
   };
 
   render() {
     // let errors = Object.values(this.state.errors);
     return (
-      <form onSubmit={this.handleSubmit}>
-        <b>Edit Bookmark</b>
+      <StyledForm onSubmit={this.handleSubmit}>
+        <h3>Edit bookmark</h3>
         {/* <div>{errors}</div> */}
         <div className="form-group">
           <label htmlFor="title">title</label>
@@ -105,12 +132,23 @@ class EditBookmarkForm extends Component<Props, State> {
             ))}
           </select>
         </div>
+        <div className="form-group form-group-checkbox">
+          <label className="form-checkbox">
+            <input
+              name="pinned"
+              type="checkbox"
+              checked={this.state.pinned}
+              onChange={this.handleChange}
+            />
+            <i className="form-icon" /> Pin to top
+          </label>
+        </div>
         <div className="form-group">
           <button className="btn btn-primary" type="submit" id="title">
             submit
           </button>
         </div>
-      </form>
+      </StyledForm>
     );
   }
 }
