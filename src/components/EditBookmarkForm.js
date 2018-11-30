@@ -54,7 +54,10 @@ class EditBookmarkForm extends Component<Props, State> {
     url: this.props.bookmark ? this.props.bookmark.url : "",
     tag: this.props.bookmark ? this.props.bookmark.tag : "",
     userId: this.props.bookmark ? this.props.bookmark.userId : "",
-    pinned: this.props.bookmark ? this.props.bookmark.pinned : false,
+    pinned:
+      this.props.bookmark && Object.keys(this.props.bookmark).includes("pinned")
+        ? this.props.bookmark.pinned
+        : false,
     errors: {}
   };
 
@@ -90,9 +93,6 @@ class EditBookmarkForm extends Component<Props, State> {
     // let errors = Object.values(this.state.errors);
     return (
       <StyledForm onSubmit={this.handleSubmit}>
-        <pre>
-          <code>{JSON.stringify(this.state, null, 2)}</code>
-        </pre>
         <h3>Edit bookmark</h3>
         {/* <div>{errors}</div> */}
         <div className="form-group">
