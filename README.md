@@ -74,6 +74,8 @@ This projects uses netlify functions, see [src/lambda/get-title.js](https://gith
 
 It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Netlify will then create the build from src/lambda, as configured in `netlify.toml`. The package netlify-lambda allows you to run the function locally with: `yarn start:lambda`.
 
+This project uses the netlify-lambda package to run lambda in development with `yarn start:lambda`
+
 Make sure you update the authorized domains for authentication in the firebase console (authentication tab)
 
 ## Screenshots

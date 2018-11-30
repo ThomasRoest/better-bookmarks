@@ -9,8 +9,9 @@ const StyledListItem = styled.li`
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  box-shadow: 0 1px 0 #ccc;
+  padding: 5px;
+  border-bottom: 1px solid lightgray;
+
   .icon-more-vert {
     padding: 1em;
     transition: background-color 0.3s ease;
@@ -26,6 +27,7 @@ const BookmarkInfo = styled.div`
   overflow: hidden;
   .label {
     font-size: 0.8em;
+    margin-right: 5px;
   }
 `;
 
@@ -43,7 +45,8 @@ type Props = {
   url: string,
   tag: string,
   userId: string,
-  deleteBookmark: Function
+  deleteBookmark: Function,
+  pinned: boolean
 };
 
 type State = {
@@ -54,13 +57,15 @@ class BookmarkListItem extends Component<Props, State> {
   state = {
     editView: false
   };
+
   handleClick = () => {
     this.setState(state => ({
       editView: !state.editView
     }));
   };
+
   render() {
-    const { id, title, url, tag, deleteBookmark, userId } = this.props;
+    const { id, title, url, tag, deleteBookmark, userId, pinned } = this.props;
 
     return (
       <StyledListItem>
@@ -89,12 +94,13 @@ class BookmarkListItem extends Component<Props, State> {
               <a href={url}>{title}</a>
               <br />
               <span className="label label-rounded label-default">{tag}</span>
+              {pinned && (
+                <span className="label label-rounded label-success">
+                  pinned
+                </span>
+              )}
             </BookmarkInfo>
-
             <i className="icon icon-more-vert" onClick={this.handleClick} />
-            {/* <button className="icon icon-edit" onClick={this.handleClick}>
-              Edit
-            </button> */}
           </React.Fragment>
         )}
       </StyledListItem>

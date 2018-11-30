@@ -30,7 +30,7 @@ class TagsPage extends Component<Props> {
       <StyledTagList>
         <h2>Tags</h2>
         <NewTagForm />
-        <table class="table table-striped table-hover">
+        <table className="table table-striped table-hover">
           <thead>
             <tr>
               <th>title</th>
@@ -39,7 +39,7 @@ class TagsPage extends Component<Props> {
           </thead>
           <tbody>
             {this.props.tags.map(tag => (
-              <tr>
+              <tr key={tag.id}>
                 <td>
                   <Link to="/" onClick={() => this.props.setFilter(tag.title)}>
                     {tag.title}

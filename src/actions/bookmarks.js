@@ -1,5 +1,4 @@
 import { firestore } from "../firebase";
-// import { loadingStart, loadingFinished } from "./loading";
 
 // REDUX ACTIONS
 export const setBookmarks = bookmarks => {
@@ -76,7 +75,8 @@ export const updateBookmark = bookmark => {
     bookmarkRef.doc(bookmark.id).update({
       title: bookmark.title,
       url: bookmark.url,
-      tag: bookmark.tag
+      tag: bookmark.tag,
+      pinned: bookmark.pinned
     });
   };
 };
@@ -109,5 +109,11 @@ export const deleteBookmark = (id, userId) => {
       .then(() => {
         dispatch(bookmarkDeleted(id));
       });
+  };
+};
+
+export const togglePinned = () => {
+  return dispatch => {
+    console.log("well hello there!");
   };
 };
