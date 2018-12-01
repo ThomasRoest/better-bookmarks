@@ -2,6 +2,12 @@
 
 A self-hosted, browser independent bookmark manager made with React, Redux, Firebase (Cloud Firestore/ authentication) and Netlify Functions.
 
+## Screenshots
+
+![HOME](/public/screenshot_home2.png)
+
+> bookmarks
+
 <img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-23+at+02.43+PM.gif" />
 
 ## Setup
@@ -77,9 +83,3 @@ It's not required, but to use this functionality, the only thing you have to do 
 This project uses the netlify-lambda package to run lambda in development with `yarn start:lambda`
 
 Make sure you update the authorized domains for authentication in the firebase console (authentication tab)
-
-## Screenshots
-
-![HOME](/public/screenshot_home.png)
-
-> bookmarks
