@@ -10,6 +10,16 @@ import styled from "styled-components";
 
 const StyledTagList = styled.div`
   padding: 20px;
+  max-width: 650px;
+  margin: 0 auto;
+  table {
+    margin-top: 20px;
+    box-shadow: 0px 5px 5px lightgrey;
+    /* border: 1px solid magenta; */
+  }
+  @media (max-width: 450px) {
+    padding: 0px;
+  }
 `;
 
 type Props = {
@@ -28,12 +38,11 @@ class TagsPage extends Component<Props> {
   render() {
     return (
       <StyledTagList>
-        <h2>Tags</h2>
         <NewTagForm />
         <table className="table table-striped table-hover">
           <thead>
             <tr>
-              <th>title</th>
+              <th className="table-header">all tags</th>
               <th />
             </tr>
           </thead>
