@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createTag } from "../actions/tags";
-import "../css/custom.css";
 
 class NewTagForm extends Component {
   state = {

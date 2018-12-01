@@ -11,9 +11,14 @@ const StyledListItem = styled.li`
   justify-content: space-between;
   padding: 0px 5px 8px 10px;
   border-bottom: 1px solid lightgray;
-  a:visited {
-    color: #551a8b;
+
+  a {
+    color: #5755d9;
+    &:visited {
+      color: #5755d9;
+    }
   }
+
   .icon-more-vert {
     padding: 1em;
     transition: background-color 0.3s ease;
