@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const StyledSidebar = styled.aside`
   background-color: #f8f9fa;
-  flex: 1 1 20%;
+  flex: 1 1 15%;
   ul {
     list-style-type: none;
     padding: 0;

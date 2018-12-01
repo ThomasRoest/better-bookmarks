@@ -12,14 +12,14 @@ const StyledHeader = styled.header`
 `;
 
 const HeaderTop = styled.div`
-  background-color: #343a40;
+  background-color: #5755d9;
   color: white;
   display: flex;
   align-items: center;
   padding-top: 5px;
   padding-bottom: 5px;
   span.title {
-    flex: 0 0 20%;
+    flex: 0 0 15%;
     text-align: left;
     padding-left: 10px;
     a {
@@ -36,10 +36,10 @@ const HeaderTop = styled.div`
     border: 0px;
     color: white;
     outline: none;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.8);
     transition: background-color 100ms ease-in;
     &:focus {
-      background-color: #fafafa;
+      background-color: #fff;
       color: #333
       transition: background-color 100ms ease-in;
     }
@@ -57,7 +57,7 @@ const HeaderTop = styled.div`
 const HeaderNav = styled.nav`
   display: flex;
   justify-content: space-around;
-  background-color: #343a40;
+  background-color: #5755d9;
   padding: 5px;
   align-items: center;
   a {

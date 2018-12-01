@@ -9,9 +9,11 @@ const StyledListItem = styled.li`
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  padding: 5px;
+  padding: 0px 5px 8px 10px;
   border-bottom: 1px solid lightgray;
-
+  a:visited {
+    color: #551a8b;
+  }
   .icon-more-vert {
     padding: 1em;
     transition: background-color 0.3s ease;

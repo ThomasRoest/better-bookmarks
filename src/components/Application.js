@@ -21,7 +21,7 @@ const FlexContainer = styled.div`
 `;
 
 const Main = styled.main`
-  flex: 1 1 80%;
+  flex: 1 1 85%;
 `;
 
 const Application = ({ auth, signIn }) => (
