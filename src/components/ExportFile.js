@@ -22,10 +22,7 @@ class ExportFile extends React.Component<Props> {
   };
   render() {
     return (
-      <button
-        className="label label-rounded label-export"
-        onClick={this.exportData}
-      >
+      <button className="btn btn-default btn-sm" onClick={this.exportData}>
         Export to JSON
       </button>
     );

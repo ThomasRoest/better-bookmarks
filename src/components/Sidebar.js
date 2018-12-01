@@ -14,6 +14,9 @@ const StyledSidebar = styled.aside`
   ul {
     list-style-type: none;
     padding: 0;
+    li {
+      margin-top: 15px;
+    }
   }
   @media (max-width: 576px) {
     display: none;
@@ -63,10 +66,12 @@ class Sidebar extends React.Component<Props> {
       <StyledSidebar>
         <ul>
           <li>
-            <Link to="/">Bookmarks</Link>
+            <Link className="btn btn-primary btn-sm" to="/bookmarks/new">
+              New bookmark
+            </Link>
           </li>
           <li>
-            <Link to="/bookmarks/new">New bookmark +</Link>
+            <Link to="/">All Bookmarks</Link>
           </li>
           <li>
             <Link to="/tags">Tags</Link>
