@@ -100,11 +100,9 @@ class BookmarkListItem extends Component<Props, State> {
             <BookmarkInfo>
               <a href={url}>{title}</a>
               <br />
-              <span className="label label-rounded label-default">{tag}</span>
+              <span className="label label-ro label-default">{tag}</span>
               {pinned && (
-                <span className="label label-rounded label-success">
-                  pinned
-                </span>
+                <span className="label label-runded label-success">pinned</span>
               )}
             </BookmarkInfo>
             <i className="icon icon-more-vert" onClick={this.handleClick} />

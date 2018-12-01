@@ -1,9 +1,14 @@
 //@flow
 
 import React from "react";
+import styled from "styled-components";
 import FileSaver from "file-saver";
 import format from "date-fns/format";
 import { connect } from "react-redux";
+
+const StyledButton = styled.button`
+  font-size: 0.8em;
+`;
 
 type Props = {
   bookmarks: Array<Object>
@@ -22,9 +27,9 @@ class ExportFile extends React.Component<Props> {
   };
   render() {
     return (
-      <button className="btn btn-default btn-sm" onClick={this.exportData}>
+      <StyledButton className="label" onClick={this.exportData}>
         Export to JSON
-      </button>
+      </StyledButton>
     );
   }
 }
