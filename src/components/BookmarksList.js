@@ -3,6 +3,7 @@
 import React from "react";
 import BookmarkListItem from "./BookmarkListItem";
 import styled from "styled-components";
+import { loadMore } from "../actions/bookmarks";
 import { connect } from "react-redux";
 
 const StyledList = styled.ul`
@@ -13,8 +14,11 @@ const StyledList = styled.ul`
 type Props = {
   bookmarks: Array<Object>,
   deleteBookmark: Function,
+  loadMore: Function,
   searchTerm: string,
-  tagFilter: string
+  tagFilter: string,
+  auth: Object,
+  lastBookmark: Number
 };
 
 class BookmarksList extends React.Component<Props> {
@@ -33,6 +37,11 @@ class BookmarksList extends React.Component<Props> {
           .indexOf(this.props.searchTerm.toUpperCase()) >= 0
       );
     }
+  };
+
+  handleLoadMore = e => {
+    const { auth, lastBookmark } = this.props;
+    this.props.loadMore(auth.uid, lastBookmark);
   };
 
   render() {
@@ -58,6 +67,7 @@ class BookmarksList extends React.Component<Props> {
             deleteBookmark={deleteBookmark}
           />
         ))}
+        <button onClick={this.handleLoadMore}>load more</button>
       </StyledList>
     );
   }
@@ -65,9 +75,14 @@ class BookmarksList extends React.Component<Props> {
 
 const mapStateToProps = state => {
   return {
+    auth: state.auth,
     tagFilter: state.filters.tagFilter,
-    searchTerm: state.filters.searchTerm
+    searchTerm: state.filters.searchTerm,
+    lastBookmark: state.lastBookmark
   };
 };
 
-export default connect(mapStateToProps)(BookmarksList);
+export default connect(
+  mapStateToProps,
+  { loadMore }
+)(BookmarksList);

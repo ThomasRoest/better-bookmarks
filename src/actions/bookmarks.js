@@ -1,9 +1,15 @@
 import { firestore } from "../firebase";
 
-// REDUX ACTIONS
 export const setBookmarks = bookmarks => {
   return {
     type: "SET_BOOKMARKS",
+    payload: bookmarks
+  };
+};
+
+export const paginateBookmarks = bookmarks => {
+  return {
+    type: "PAGINATE_BOOKMARKS",
     payload: bookmarks
   };
 };
@@ -34,19 +40,50 @@ export const bookmarkFetched = (id, data) => {
   };
 };
 
-// FIRESTORE ACTIONS
+export const setLastbookmark = lastbookmark => {
+  return {
+    type: "SET_LAST_BOOKMARK",
+    lastbookmark
+  };
+};
+
 export const fetchBookmarks = userId => {
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
-    .orderBy("createdAt", "desc");
+    .orderBy("createdAt", "desc")
+    .limit(4);
   return dispatch => {
     dispatch({ type: "LOADING_START" });
+
     bookmarkRef.get().then(querySnapshot => {
       const newbookmarks = querySnapshot.docs.map(doc => {
         return { id: doc.id, ...doc.data() };
       });
-      dispatch(setBookmarks(newbookmarks));
+
       dispatch({ type: "LOADING_FINISHED" });
+      dispatch(setBookmarks(newbookmarks));
+      dispatch(setLastbookmark(newbookmarks[newbookmarks.length - 1]));
+    });
+  };
+};
+
+export const loadMore = (userId, lastbookmark) => {
+  const bookmarkRef = firestore
+    .collection(`users/${userId}/bookmarks`)
+    .orderBy("createdAt", "desc")
+    .startAfter(lastbookmark)
+    .limit(4);
+  return dispatch => {
+    dispatch({ type: "LOADING_START" });
+
+    bookmarkRef.get().then(querySnapshot => {
+      const newbookmarks = querySnapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
+
+      dispatch({ type: "LOADING_FINISHED" });
+      dispatch(paginateBookmarks(newbookmarks));
+      dispatch(setLastbookmark(newbookmarks[newbookmarks.length - 1]));
     });
   };
 };
@@ -109,11 +146,5 @@ export const deleteBookmark = (id, userId) => {
       .then(() => {
         dispatch(bookmarkDeleted(id));
       });
-  };
-};
-
-export const togglePinned = () => {
-  return dispatch => {
-    console.log("well hello there!");
   };
 };

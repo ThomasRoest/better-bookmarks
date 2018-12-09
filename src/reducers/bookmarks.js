@@ -23,6 +23,10 @@ const setBookmarks = (state, action) => {
   return action.payload;
 };
 
+const paginateBookmarks = (state, action) => {
+  return [...state, ...action.payload];
+};
+
 const setBookmark = (state, action) => {
   // refactor?
   const index = state.findIndex(item => item.id === action.payload.id);
@@ -41,6 +45,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case "SET_BOOKMARKS":
       return setBookmarks(state, action);
+    case "PAGINATE_BOOKMARKS":
+      return paginateBookmarks(state, action);
     case "ADD_BOOKMARK":
       return addBookmark(state, action);
     case "REMOVE_BOOKMARK":

@@ -12,7 +12,8 @@ const initialState = {
   },
   isLoading: false,
   tags: [],
-  bookmarks: []
+  bookmarks: [],
+  lastBookmark: null
 };
 
 export default initialState;
