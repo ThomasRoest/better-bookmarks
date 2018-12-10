@@ -39,17 +39,14 @@ class BookmarksPage extends Component<Props> {
             </div>
           </div>
         )} */}
-        <BookmarksList
-          bookmarks={this.props.bookmarks}
-          deleteBookmark={this.props.deleteBookmark}
-        />
+        <BookmarksList deleteBookmark={this.props.deleteBookmark} />
       </StyledBookmarksPage>
     );
   }
 }
 
-const mapStateToProps = ({ bookmarks, auth, isLoading }) => {
-  return { bookmarks, auth, isLoading };
+const mapStateToProps = ({ auth, isLoading }) => {
+  return { auth, isLoading };
 };
 
 export default connect(

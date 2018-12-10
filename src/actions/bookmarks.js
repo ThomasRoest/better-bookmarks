@@ -67,6 +67,25 @@ export const fetchBookmarks = userId => {
   };
 };
 
+export const queryByTag = (userId, tag) => {
+  const bookmarkRef = firestore
+    .collection(`users/${userId}/bookmarks`)
+    .where("tag", "==", tag);
+
+  return dispatch => {
+    dispatch({ type: "LOADING_START" });
+
+    bookmarkRef.get().then(querySnapshot => {
+      const newbookmarks = querySnapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
+
+      dispatch({ type: "LOADING_FINISHED" });
+      dispatch(setBookmarks(newbookmarks));
+    });
+  };
+};
+
 export const loadMore = (userId, lastbookmark) => {
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
@@ -82,8 +101,11 @@ export const loadMore = (userId, lastbookmark) => {
       });
 
       dispatch({ type: "LOADING_FINISHED" });
-      dispatch(paginateBookmarks(newbookmarks));
-      dispatch(setLastbookmark(newbookmarks[newbookmarks.length - 1]));
+
+      if (newbookmarks.length >= 1) {
+        dispatch(paginateBookmarks(newbookmarks));
+        dispatch(setLastbookmark(newbookmarks[newbookmarks.length - 1]));
+      }
     });
   };
 };
