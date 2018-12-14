@@ -1,56 +1,57 @@
 //@flow
 
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions/auth";
-import { setSearchTerm } from "../actions/filters";
+import { searchQuery, fetchBookmarks } from "../actions/bookmarks";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledHeader = styled.header`
-  /* background-color: #333; */
-`;
-
 const HeaderTop = styled.div`
   background-color: #5755d9;
-  color: white;
   display: flex;
+  padding: 10px;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  span.title {
-    flex: 0 0 15%;
-    text-align: left;
-    padding-left: 10px;
+  .title-section {
+    flex: 0 1 15%;
     a {
       color: white;
-      font-weight: bold;
+      font-weight: 700;
     }
     @media (max-width: 576px) {
       display: none;
     }
   }
-  input {
-    padding: 0.4rem;
-    flex: 1 0 70%;
-    border: 0px;
-    color: white;
-    outline: none;
-    background-color: rgba(255, 255, 255, 0.8);
-    transition: background-color 100ms ease-in;
-    &:focus {
-      background-color: #fff;
-      color: #333
-      transition: background-color 100ms ease-in;
+  .search-controls {
+    flex: 1 1 auto;
+    .flex-container {
+      display: flex;
+    }
+    input[type="search"] {
+      flex: 1;
+      border: 0px;
+      outline: none;
+      padding: 0.3rem;
+    }
+    input[type="submit"] {
+      background-color: white;
+      border: 1px solid white;
+      border-left: 1px solid purple;
+      box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+      color: #5755d9;
+      font-size: 0.7rem;
     }
   }
-  span.userinfo {
+  .userinfo {
     text-align: center;
-    flex: 0 0 10%;
-    .btn-link { 
-      color: lightblue; 
-      &:hover { color: blueviolet;}
+    flex: 0 1 10%;
+    .btn.btn-link {
+      color: #fff;
+      &:hover {
+        color: lightblue;
       }
+    }
   }
 `;
 
@@ -83,40 +84,62 @@ type Props = {
   handleSearchTermChange: Function
 };
 
-const MainHeader = ({
-  auth,
-  signIn,
-  signOut,
-  searchTerm,
-  match,
-  handleSearchTermChange
-}: Props) => {
-  return (
-    <StyledHeader>
-      <HeaderTop>
-        <span className="title">
-          <Link to="/">Better Bookmarks</Link>
-        </span>
-        <input
-          type="search"
-          placeholder="Search...   Use '#' to filter by tag. e.g. !css"
-          value={searchTerm}
-          onChange={handleSearchTermChange}
-        />
-        <span className="userinfo">
-          <button className="btn btn-sm btn-link" onClick={signOut}>
-            signout
-          </button>
-        </span>
-      </HeaderTop>
-      <HeaderNav>
-        <Link to="/">Bookmarks</Link>
-        <Link to="/bookmarks/new">New bookmark</Link>
-        <Link to="/tags">tags</Link>
-      </HeaderNav>
-    </StyledHeader>
-  );
+type State = {
+  searchTerm: string
 };
+
+class MainHeader extends Component<Props, State> {
+  state = {
+    searchTerm: ""
+  };
+
+  handleSearchTermChange = event => {
+    const searchTerm = event.target.value;
+    this.setState({ searchTerm });
+  };
+
+  handleSearchSubmit = event => {
+    event.preventDefault();
+    this.props.searchQuery(this.props.auth.uid, this.state.searchTerm);
+  };
+
+  render() {
+    const { signOut, searchTerm } = this.props;
+    return (
+      <header>
+        <HeaderTop>
+          <div className="title-section">
+            <Link to="/">Better Bookmarks</Link>
+          </div>
+          <div className="search-controls">
+            <form onSubmit={this.handleSearchSubmit}>
+              <div className="flex-container">
+                <input
+                  type="search"
+                  placeholder="Search..."
+                  value={searchTerm}
+                  onChange={e => this.handleSearchTermChange(e)}
+                />
+                <input type="submit" value="search" />
+              </div>
+            </form>
+          </div>
+          <div className="userinfo">
+            <button className="btn btn-sm btn-link" onClick={signOut}>
+              signout
+            </button>
+          </div>
+        </HeaderTop>
+
+        <HeaderNav>
+          <Link to="/">Bookmarks</Link>
+          <Link to="/bookmarks/new">New bookmark</Link>
+          <Link to="/tags">tags</Link>
+        </HeaderNav>
+      </header>
+    );
+  }
+}
 
 const mapStateToProps = ({ auth, searchTerm }) => {
   return {
@@ -125,20 +148,7 @@ const mapStateToProps = ({ auth, searchTerm }) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signIn() {
-      dispatch(signIn());
-    },
-    signOut() {
-      dispatch(signOut());
-    },
-    handleSearchTermChange(event) {
-      dispatch(setSearchTerm(event.target.value));
-    }
-  };
-};
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { signIn, signOut, searchQuery }
 )(MainHeader);

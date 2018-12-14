@@ -21,7 +21,8 @@ export const addBookmark = (id, data) => {
       id: id,
       title: data.title,
       url: data.url,
-      userId: data.userId
+      userId: data.userId,
+      searchTerms: data.searchTerms
     }
   };
 };
@@ -51,7 +52,30 @@ export const fetchBookmarks = userId => {
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
     .orderBy("createdAt", "desc")
-    .limit(4);
+    .limit(10);
+  return dispatch => {
+    dispatch({ type: "LOADING_START" });
+
+    bookmarkRef.get().then(querySnapshot => {
+      const newbookmarks = querySnapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
+
+      dispatch({ type: "LOADING_FINISHED" });
+
+      if (newbookmarks.length >= 1) {
+        dispatch(setBookmarks(newbookmarks));
+        dispatch(setLastbookmark(newbookmarks[newbookmarks.length - 1]));
+      }
+    });
+  };
+};
+
+export const queryByTag = (userId, tag) => {
+  const bookmarkRef = firestore
+    .collection(`users/${userId}/bookmarks`)
+    .where("tag", "==", tag);
+
   return dispatch => {
     dispatch({ type: "LOADING_START" });
 
@@ -62,15 +86,15 @@ export const fetchBookmarks = userId => {
 
       dispatch({ type: "LOADING_FINISHED" });
       dispatch(setBookmarks(newbookmarks));
-      dispatch(setLastbookmark(newbookmarks[newbookmarks.length - 1]));
     });
   };
 };
 
-export const queryByTag = (userId, tag) => {
+export const searchQuery = (userId, query) => {
+  console.log(userId, query);
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
-    .where("tag", "==", tag);
+    .where("searchTerms", "array-contains", query);
 
   return dispatch => {
     dispatch({ type: "LOADING_START" });

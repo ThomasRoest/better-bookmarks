@@ -46,23 +46,6 @@ type Props = {
 };
 
 class BookmarksList extends React.Component<Props> {
-  // filterByTag = item => {
-  //   return item.tag === this.props.tagFilter;
-  // };
-
-  // filterBySearchTerm = item => {
-  //   if (this.props.searchTerm.startsWith("#")) {
-  //     const searchTerm = this.props.searchTerm.substring(1);
-  //     return `${item.tag}`.toUpperCase().indexOf(searchTerm.toUpperCase()) >= 0;
-  //   } else {
-  //     return (
-  //       `${item.title} ${item.url}`
-  //         .toUpperCase()
-  //         .indexOf(this.props.searchTerm.toUpperCase()) >= 0
-  //     );
-  //   }
-  // };
-
   handleLoadMore = e => {
     const { auth, lastBookmark } = this.props;
     this.props.loadMore(auth.uid, lastBookmark);
@@ -70,22 +53,13 @@ class BookmarksList extends React.Component<Props> {
 
   render() {
     const { bookmarks, deleteBookmark } = this.props;
-    // const { bookmarks, deleteBookmark, searchTerm, tagFilter } = this.props;
-    // let filteredList = [];
-
-    // if (searchTerm.length >= 1) {
-    //   filteredList = bookmarks.filter(this.filterBySearchTerm);
-    // } else if (tagFilter !== "default") {
-    //   filteredList = bookmarks.filter(this.filterByTag);
-    // } else {
-    //   filteredList = bookmarks.sort((a, b) => {
-    //     return b.pinned - a.pinned;
-    //   });
-    // }
+    const filteredList = bookmarks.sort((a, b) => {
+      return b.pinned - a.pinned;
+    });
 
     return (
       <StyledList>
-        {bookmarks.map(item => (
+        {filteredList.map(item => (
           <BookmarkListItem
             key={item.id}
             {...item}

@@ -85,15 +85,17 @@ class NewBookmarkForm extends Component<Props, State> {
 
   handleSubmit = event => {
     event.preventDefault();
+
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
+    const searchTerms = this.state.title.toLowerCase().split(" ");
 
     if (!errors) {
       const { title, url, tag, userId, pinned } = this.state;
       const createdAt = Math.floor(Date.now() / 1000);
       this.props.createBookmark(
-        { title, url, tag, userId, createdAt, pinned },
+        { title, url, tag, userId, createdAt, pinned, searchTerms },
         this.props.auth
       );
       this.setState({ title: "", url: "", tag: "" });
