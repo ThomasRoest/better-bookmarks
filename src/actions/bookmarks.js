@@ -115,7 +115,7 @@ export const loadMore = (userId, lastbookmark) => {
     .collection(`users/${userId}/bookmarks`)
     .orderBy("createdAt", "desc")
     .startAfter(lastbookmark)
-    .limit(4);
+    .limit(10);
   return dispatch => {
     dispatch({ type: "LOADING_START" });
 
