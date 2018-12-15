@@ -70,7 +70,15 @@ service cloud.firestore {
 
 7. To enable authentication with Google, go to the navigation tab to add a login method --> select google option from the providers and switch the toggle to enable. If you scroll down, you can see the authorized domains for which this login method will work. This is important to update when you deploy your project.
 
-8. That's it for the Firebase setup. You can now run `yarn start` to run the application locally.
+8. You can now run `yarn start` to run the application locally.
+
+9. The default query for fetching all bookmarks requires an index in firestore, so you might see this error in the console:
+
+`Uncaught (in promise) Error: The query requires an index. You can create it here:`
+
+follow the link to create the index.
+
+10. This project also uses netlify functions, to use it locally run `yarn start:lambda`
 
 ## Netlify Functions & Deploying
 
@@ -78,8 +86,6 @@ Run `yarn build` to create a production build for this project.
 
 This projects uses netlify functions, see [src/lambda/get-title.js](https://github.com/ThomasRoest/better-bookmarks/blob/master/src/lambda/get-title.js) to get page titles from url's.
 
-It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Netlify will then create the build from src/lambda, as configured in `netlify.toml`. The package netlify-lambda allows you to run the function locally with: `yarn start:lambda`.
-
-This project uses the netlify-lambda package to run lambda in development with `yarn start:lambda`
+It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Netlify will then create the build from src/lambda, as configured in `netlify.toml`.
 
 Make sure you update the authorized domains for authentication in the firebase console (authentication tab)

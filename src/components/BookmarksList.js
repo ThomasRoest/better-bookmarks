@@ -53,13 +53,9 @@ class BookmarksList extends React.Component<Props> {
 
   render() {
     const { bookmarks, deleteBookmark } = this.props;
-    const filteredList = bookmarks.sort((a, b) => {
-      return b.pinned - a.pinned;
-    });
-
     return (
       <StyledList>
-        {filteredList.map(item => (
+        {bookmarks.map(item => (
           <BookmarkListItem
             key={item.id}
             {...item}

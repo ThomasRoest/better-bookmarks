@@ -51,6 +51,7 @@ export const setLastbookmark = lastbookmark => {
 export const fetchBookmarks = userId => {
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
+    .orderBy("pinned", "desc")
     .orderBy("createdAt", "desc")
     .limit(10);
   return dispatch => {
@@ -91,7 +92,6 @@ export const queryByTag = (userId, tag) => {
 };
 
 export const searchQuery = (userId, query) => {
-  console.log(userId, query);
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
     .where("searchTerms", "array-contains", query);
