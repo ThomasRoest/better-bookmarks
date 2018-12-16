@@ -53,7 +53,7 @@ export const fetchBookmarks = userId => {
     .collection(`users/${userId}/bookmarks`)
     .orderBy("pinned", "desc")
     .orderBy("createdAt", "desc")
-    .limit(4);
+    .limit(10);
   return dispatch => {
     dispatch({ type: "LOADING_START" });
 
