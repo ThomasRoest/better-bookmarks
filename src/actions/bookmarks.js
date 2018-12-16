@@ -113,6 +113,7 @@ export const searchQuery = (userId, query) => {
 export const loadMore = (userId, lastbookmark) => {
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
+    .where("pinned", "==", "true")
     .orderBy("createdAt", "desc")
     .startAfter(lastbookmark)
     .limit(10);

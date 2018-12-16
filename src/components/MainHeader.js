@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions/auth";
-import { searchQuery, fetchBookmarks } from "../actions/bookmarks";
+import { searchQuery } from "../actions/bookmarks";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
