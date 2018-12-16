@@ -53,7 +53,7 @@ export const fetchBookmarks = userId => {
     .collection(`users/${userId}/bookmarks`)
     .orderBy("pinned", "desc")
     .orderBy("createdAt", "desc")
-    .limit(10);
+    .limit(4);
   return dispatch => {
     dispatch({ type: "LOADING_START" });
 
@@ -113,7 +113,7 @@ export const searchQuery = (userId, query) => {
 export const loadMore = (userId, lastbookmark) => {
   const bookmarkRef = firestore
     .collection(`users/${userId}/bookmarks`)
-    .where("pinned", "==", "true")
+    .where("pinned", "==", false)
     .orderBy("createdAt", "desc")
     .startAfter(lastbookmark)
     .limit(10);
