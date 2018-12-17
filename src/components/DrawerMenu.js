@@ -18,7 +18,8 @@ const Backdrop = styled.div`
 const StyledMenu = styled.div`
   background-color: white;
   height: 100%;
-  width: 200px;
+  width: 230px;
+  overflow: scroll;
 `;
 
 const CloseButton = styled.div`
