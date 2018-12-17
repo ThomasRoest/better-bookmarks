@@ -66,6 +66,8 @@ const FilterButton = styled.button`
   }
   &:active {
     transform: scale(0.99);
+    background-color: #1665d8;
+    color: white;
   }
 `;
 
