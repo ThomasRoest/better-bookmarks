@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { queryByTag } from "../actions/bookmarks";
 import { setFilter } from "../actions/filters";
+import { signOut } from "../actions/auth";
 import { toggleDrawerMenu } from "../actions/menuState";
 
 const Backdrop = styled.div`
@@ -22,9 +23,13 @@ const StyledMenu = styled.div`
   overflow: scroll;
 `;
 
+const MenuHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const CloseButton = styled.div`
   display: inline-block;
-  float: right;
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -83,7 +88,13 @@ class DrawerMenu extends Component<Props> {
     return (
       <Backdrop>
         <StyledMenu>
-          <CloseButton onClick={this.props.toggleDrawerMenu}>X</CloseButton>
+          <MenuHeader>
+            <button className="btn btn-sm" onClick={this.props.signOut}>
+              signout
+            </button>
+            <CloseButton onClick={this.props.toggleDrawerMenu}>X</CloseButton>
+          </MenuHeader>
+
           {this.props.tags.map(item => (
             <FilterButton
               key={item.id}
@@ -104,5 +115,5 @@ const mapStateToProps = ({ auth, tags }) => {
 
 export default connect(
   mapStateToProps,
-  { setFilter, queryByTag, toggleDrawerMenu }
+  { setFilter, queryByTag, toggleDrawerMenu, signOut }
 )(DrawerMenu);

@@ -134,11 +134,6 @@ class MainHeader extends Component<Props, State> {
               </div>
             </form>
           </div>
-          <div className="userinfo">
-            <button className="btn btn-sm btn-link" onClick={signOut}>
-              signout
-            </button>
-          </div>
         </HeaderTop>
 
         <HeaderNav>
