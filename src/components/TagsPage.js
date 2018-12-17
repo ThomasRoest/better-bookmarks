@@ -15,7 +15,6 @@ const StyledTagList = styled.div`
   table {
     margin-top: 20px;
     box-shadow: 0px 5px 5px lightgrey;
-    /* border: 1px solid magenta; */
   }
   @media (max-width: 450px) {
     padding: 0px;

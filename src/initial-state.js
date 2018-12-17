@@ -13,7 +13,8 @@ const initialState = {
   isLoading: false,
   tags: [],
   bookmarks: [],
-  lastBookmark: null
+  lastBookmark: null,
+  menuIsOpen: false
 };
 
 export default initialState;

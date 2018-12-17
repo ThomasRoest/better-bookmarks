@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions/auth";
 import { searchQuery } from "../actions/bookmarks";
+import { toggleDrawerMenu } from "../actions/menuState";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -81,7 +82,9 @@ type Props = {
   signIn: Function,
   signOut: Function,
   searchTerm: string,
-  handleSearchTermChange: Function
+  handleSearchTermChange: Function,
+  toggleDrawerMenu: Function,
+  searchQuery: Function
 };
 
 type State = {
@@ -111,6 +114,13 @@ class MainHeader extends Component<Props, State> {
           <div className="title-section">
             <Link to="/">Better Bookmarks</Link>
           </div>
+          <button
+            className="btn btn-action btn-primary btn-lg"
+            onClick={this.props.toggleDrawerMenu}
+          >
+            <i className="icon icon-menu" />
+          </button>
+
           <div className="search-controls">
             <form onSubmit={this.handleSearchSubmit}>
               <div className="flex-container">
@@ -150,5 +160,5 @@ const mapStateToProps = ({ auth, searchTerm }) => {
 
 export default connect(
   mapStateToProps,
-  { signIn, signOut, searchQuery }
+  { signIn, signOut, searchQuery, toggleDrawerMenu }
 )(MainHeader);

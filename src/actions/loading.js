@@ -1,3 +1,5 @@
+//@flow
+
 export const loadingStart = () => {
   return {
     type: "LOADING_START"

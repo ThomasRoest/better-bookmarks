@@ -13,6 +13,7 @@ import MainHeader from "./MainHeader";
 import TagsPage from "./TagsPage";
 import BookmarksPage from "./BookmarksPage";
 import Sidebar from "./Sidebar";
+import DrawerMenu from "./DrawerMenu";
 
 const FlexContainer = styled.div`
   @media (min-width: 579px) {
@@ -24,7 +25,7 @@ const Main = styled.main`
   flex: 1 1 85%;
 `;
 
-const Application = ({ auth, signIn }) => (
+const Application = ({ auth, signIn, menuIsOpen }) => (
   <Router>
     <React.Fragment>
       {auth.status === "ANONYMOUS" && <SignIn signIn={signIn} />}
@@ -32,6 +33,7 @@ const Application = ({ auth, signIn }) => (
       {auth.status === "SIGNED_IN" && (
         <React.Fragment>
           <MainHeader />
+          {menuIsOpen && <DrawerMenu />}
           <FlexContainer>
             <Sidebar />
 
@@ -58,9 +60,10 @@ const Application = ({ auth, signIn }) => (
   </Router>
 );
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, menuIsOpen }) => {
   return {
-    auth: auth
+    auth: auth,
+    menuIsOpen
   };
 };
 
