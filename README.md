@@ -10,6 +10,8 @@ A self-hosted, browser independent bookmark manager made with React, Redux, Fire
 
 <img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-23+at+02.43+PM.gif" />
 
+<img height="400px" src="https://s3-eu-west-1.amazonaws.com/github-images123/bb+mobile+gif.gif" />
+
 ## Setup
 
 1. Clone the repository
