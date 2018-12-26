@@ -1,12 +1,13 @@
 //@flow
 
 import React, { Component } from "react";
+import styled from "styled-components";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { signIn, signOut } from "../actions/auth";
 import { searchQuery } from "../actions/bookmarks";
 import { toggleDrawerMenu } from "../actions/menuState";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import Search from "./Search";
 
 const HeaderTop = styled.div`
   background-color: #5755d9;
@@ -112,7 +113,9 @@ class MainHeader extends Component<Props, State> {
       <header>
         <HeaderTop>
           <div className="title-section">
-            <Link to="/">Better Bookmarks</Link>
+            <Link to="/">
+              Better <br /> Bookmarks
+            </Link>
           </div>
           <button
             className="btn btn-action btn-primary btn-lg"
@@ -122,7 +125,8 @@ class MainHeader extends Component<Props, State> {
           </button>
 
           <div className="search-controls">
-            <form onSubmit={this.handleSearchSubmit}>
+            <Search />
+            {/* <form onSubmit={this.handleSearchSubmit}>
               <div className="flex-container">
                 <input
                   type="search"
@@ -132,7 +136,7 @@ class MainHeader extends Component<Props, State> {
                 />
                 <input type="submit" value="search" />
               </div>
-            </form>
+            </form> */}
           </div>
         </HeaderTop>
 

@@ -1,0 +1,1 @@
+export const LAMBDA_ENDPOINT = process.env.REACT_APP_LAMBDA_ENDPOINT;

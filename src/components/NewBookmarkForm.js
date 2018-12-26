@@ -2,13 +2,11 @@
 
 import React, { Component } from "react";
 import axios from "axios";
+import { LAMBDA_ENDPOINT } from "../config.js";
 import { connect } from "react-redux";
 import { createBookmark } from "../actions/bookmarks";
 import { fetchTags } from "../actions/tags";
 import styled from "styled-components";
-
-const lambdaDev = "http://localhost:9000/get-title";
-const lambdaProd = "/.netlify/functions/get-title";
 
 const StyledForm = styled.form`
   padding: 1.5rem;
@@ -35,7 +33,6 @@ type State = {
   url: string,
   tag: string,
   pinned: boolean,
-  userId: string,
   errors: Object,
   isLoading: boolean
 };
@@ -53,7 +50,6 @@ class NewBookmarkForm extends Component<Props, State> {
     url: "",
     tag: "",
     pinned: false,
-    userId: this.props.auth.uid,
     errors: {},
     isLoading: false
   };
@@ -89,16 +85,16 @@ class NewBookmarkForm extends Component<Props, State> {
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
-    const searchTerms = this.state.title.toLowerCase().split(" ");
 
     if (!errors) {
-      const { title, url, tag, userId, pinned } = this.state;
+      const { title, url, tag, pinned } = this.state;
       const createdAt = Math.floor(Date.now() / 1000);
-      this.props.createBookmark(
-        { title, url, tag, userId, createdAt, pinned, searchTerms },
-        this.props.auth
-      );
+      const userId = this.props.auth.uid;
+      const bookmark = { title, url, tag, pinned, createdAt, userId };
+
+      this.props.createBookmark(bookmark);
       this.setState({ title: "", url: "", tag: "" });
+      this.updateAlgoliaIndex(bookmark);
     }
   };
 
@@ -109,11 +105,11 @@ class NewBookmarkForm extends Component<Props, State> {
       url: url
     };
 
-    const endpoint =
-      process.env.NODE_ENV === "development" ? lambdaDev : lambdaProd;
-
     try {
-      let response = await axios.post(endpoint, JSON.stringify(obj));
+      let response = await axios.post(
+        `${LAMBDA_ENDPOINT}get-title`,
+        JSON.stringify(obj)
+      );
       this.setState({ title: response.data.pageTitle, isLoading: false });
     } catch (error) {
       console.log("ERROR: " + error);
@@ -121,6 +117,10 @@ class NewBookmarkForm extends Component<Props, State> {
         isLoading: false
       });
     }
+  };
+
+  updateAlgoliaIndex = bookmark => {
+    axios.post(`${LAMBDA_ENDPOINT}algolia`, JSON.stringify(bookmark));
   };
 
   render() {

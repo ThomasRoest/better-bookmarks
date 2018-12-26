@@ -14,6 +14,7 @@ const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   top: 0;
+  z-index: 100;
 `;
 
 const StyledMenu = styled.div`
@@ -76,7 +77,8 @@ type Props = {
   setFilter: Function,
   auth: Object,
   toggleDrawerMenu: Function,
-  tags: Array<Object>
+  tags: Array<Object>,
+  signOut: Function
 };
 
 class DrawerMenu extends Component<Props> {

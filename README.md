@@ -91,3 +91,8 @@ This projects uses netlify functions, see [src/lambda/get-title.js](https://gith
 It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Netlify will then create the build from src/lambda, as configured in `netlify.toml`.
 
 Make sure you update the authorized domains for authentication in the firebase console (authentication tab)
+
+## Search with Algolia
+
+- signup for a free account on algolia.com
+- go to your dashboard
