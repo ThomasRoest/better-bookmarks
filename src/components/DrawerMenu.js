@@ -27,24 +27,7 @@ const StyledMenu = styled.div`
 const MenuHeader = styled.header`
   display: flex;
   justify-content: space-between;
-`;
-
-const CloseButton = styled.div`
-  display: inline-block;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 3px 0;
-  text-decoration: none;
-  background: white;
-  cursor: pointer;
-  text-align: center;
-  transition: background 250ms ease-in-out, transform 150ms ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  padding: 0.5rem;
 `;
 
 const FilterButton = styled.button`
@@ -96,7 +79,12 @@ class DrawerMenu extends Component<Props> {
             <button className="btn btn-sm" onClick={this.props.signOut}>
               signout
             </button>
-            <CloseButton onClick={this.props.toggleDrawerMenu}>X</CloseButton>
+            <div
+              class="btn btn-action btn-sm"
+              onClick={this.props.toggleDrawerMenu}
+            >
+              <i class="icon icon-cross" />
+            </div>
           </MenuHeader>
 
           {this.props.tags.map(item => (
