@@ -12,14 +12,18 @@ import {
 const StyledSearch = styled.div`
   padding: 1rem;
   .ais-Hits-list {
-    /* width: 100%; */
+    min-width: 500px;
+    max-width: 700px;
     border: 0px;
     position: absolute;
     display: block;
     margin: 0px 0px 0px 0px;
-    box-shadow: 5px 5px 10px grey;
-    width: 80%;
+    box-shadow: 1px 1px 1px #333;
     z-index: 1;
+    @media (max-width: 450px) {
+      left: 0;
+      right: 0;
+    }
   }
   .ais-Hits-item {
     border: 0px;
