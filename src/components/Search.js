@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 import {
   InstantSearch,
   Hits,
@@ -68,12 +69,12 @@ const Content = connectStateResults(({ searchState, searchResults }) => {
   );
 });
 
-const Search = () => (
+const Search = ({ uid }) => (
   <StyledSearch>
     <InstantSearch
       appId={process.env.REACT_APP_ALGOLIA_APP_ID}
       apiKey={process.env.REACT_APP_ALGOLIA_SEARCH_KEY}
-      indexName="bookmarks"
+      indexName={`bookmarks-${uid}`}
     >
       <SearchBox />
       <Content />
@@ -81,4 +82,10 @@ const Search = () => (
   </StyledSearch>
 );
 
-export default Search;
+const mapStateToProps = ({ auth }) => {
+  return {
+    uid: auth.uid
+  };
+};
+
+export default connect(mapStateToProps)(Search);
