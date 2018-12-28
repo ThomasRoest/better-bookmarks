@@ -80,10 +80,10 @@ class DrawerMenu extends Component<Props> {
               signout
             </button>
             <div
-              class="btn btn-action btn-sm"
+              className="btn btn-action btn-sm"
               onClick={this.props.toggleDrawerMenu}
             >
-              <i class="icon icon-cross" />
+              <i className="icon icon-cross" />
             </div>
           </MenuHeader>
 

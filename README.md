@@ -96,3 +96,4 @@ Make sure you update the authorized domains for authentication in the firebase c
 
 - signup for a free account on algolia.com
 - go to your dashboard
+- Don't use the admin key, go to your dashboard, with addobject permissions./

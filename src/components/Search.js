@@ -48,13 +48,11 @@ const StyledSearch = styled.div`
   }
 `;
 
-const Bookmark = ({ hit }) => {
-  return (
-    <a href={hit.url}>
-      <Highlight attribute="title" hit={hit} />
-    </a>
-  );
-};
+const Bookmark = ({ hit }) => (
+  <a href={hit.url}>
+    <Highlight attribute="title" hit={hit} />
+  </a>
+);
 
 const Content = connectStateResults(({ searchState, searchResults }) => {
   const hasResults = searchResults && searchResults.nbHits !== 0;
@@ -64,9 +62,6 @@ const Content = connectStateResults(({ searchState, searchResults }) => {
       {searchState.query && (
         <div hidden={!hasResults}>
           <Hits hitComponent={Bookmark} />
-          {/* <div hidden={hasResults}>
-            <div>No results has been found for {searchState.query}</div>
-          </div> */}
         </div>
       )}
     </React.Fragment>
