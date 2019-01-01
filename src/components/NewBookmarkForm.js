@@ -39,6 +39,7 @@ type State = {
 
 type Props = {
   createBookmark: Function,
+  createAlgoliaItem: Function,
   tagOptions: Array<Object>,
   auth: Object,
   fetchTags: Function
@@ -94,7 +95,6 @@ class NewBookmarkForm extends Component<Props, State> {
 
       this.props.createBookmark(bookmark);
       this.setState({ title: "", url: "", tag: "" });
-      this.updateAlgoliaIndex(bookmark);
     }
   };
 
@@ -117,10 +117,6 @@ class NewBookmarkForm extends Component<Props, State> {
         isLoading: false
       });
     }
-  };
-
-  updateAlgoliaIndex = bookmark => {
-    axios.post(`${LAMBDA_ENDPOINT}algolia`, JSON.stringify(bookmark));
   };
 
   render() {

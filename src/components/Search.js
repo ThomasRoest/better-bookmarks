@@ -18,7 +18,7 @@ const StyledSearch = styled.div`
     position: absolute;
     display: block;
     margin: 0px 0px 0px 0px;
-    box-shadow: 1px 1px 1px #333;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     z-index: 1;
     @media (max-width: 450px) {
       left: 0;

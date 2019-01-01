@@ -1,4 +1,6 @@
 import { firestore } from "../firebase";
+import axios from "axios";
+import { LAMBDA_ENDPOINT } from "../config";
 
 export const setBookmarks = bookmarks => {
   return {
@@ -24,6 +26,19 @@ export const addBookmark = (id, data) => {
       userId: data.userId,
       searchTerms: data.searchTerms
     }
+  };
+};
+
+export const createAlgoliaItem = (id, data) => {
+  const bookmark = { id, ...data };
+  return dispatch => {
+    axios.post(`${LAMBDA_ENDPOINT}algolia-add`, JSON.stringify(bookmark));
+  };
+};
+
+export const deleteAlgoliaItem = id => {
+  return dispatch => {
+    console.log(`delete algolia item with id? ${id}`);
   };
 };
 
@@ -144,6 +159,7 @@ export const createBookmark = bookmark => {
       .add(bookmark)
       .then(docRef => {
         dispatch(addBookmark(docRef.id, bookmark));
+        dispatch(createAlgoliaItem(docRef.id, bookmark));
       })
       .catch(error => {
         console.log(error);
@@ -193,5 +209,6 @@ export const deleteBookmark = (id, userId) => {
       .then(() => {
         dispatch(bookmarkDeleted(id));
       });
+    dispatch(deleteAlgoliaItem(id));
   };
 };
