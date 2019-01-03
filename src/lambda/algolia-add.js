@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
   try {
     const bookmark = JSON.parse(event.body);
     var index = client.initIndex(`bookmarks-${bookmark.userId}`);
-    index.addObjects([bookmark], (err, content) => {
+    await index.addObjects([bookmark], (err, content) => {
       if (err) throw err;
     });
     return {
