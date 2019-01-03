@@ -36,9 +36,10 @@ export const createAlgoliaItem = (id, data) => {
   };
 };
 
-export const deleteAlgoliaItem = id => {
+export const deleteAlgoliaItem = (id, userId) => {
+  const data = { id, userId };
   return dispatch => {
-    console.log(`delete algolia item with id? ${id}`);
+    axios.post(`${LAMBDA_ENDPOINT}algolia-delete`, JSON.stringify(data));
   };
 };
 
@@ -209,6 +210,6 @@ export const deleteBookmark = (id, userId) => {
       .then(() => {
         dispatch(bookmarkDeleted(id));
       });
-    dispatch(deleteAlgoliaItem(id));
+    dispatch(deleteAlgoliaItem(id, userId));
   };
 };

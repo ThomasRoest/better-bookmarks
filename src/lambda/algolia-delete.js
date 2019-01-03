@@ -13,20 +13,32 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  const bookmark = JSON.parse(event.body);
+  const data = JSON.parse(event.body);
+  console.log(data);
 
   // init index with userId
-  var index = client.initIndex(`bookmarks-${bookmark.userId}`);
+  // var index = client.initIndex(`bookmarks-${data.userId}`);
 
   // index.deleteObjects(objectIds, callback);
 
   // async await????? --> where is the await
 
-  await index.deleteObject("661296680", function(err, content) {
-    if (err) throw err;
+  // await index.deleteBy(
+  //   {
+  //     id: "Z1Gcrzx1iBLQ8o80jIFE"
+  //   },
+  //   function(err, content) {
+  //     if (err) throw err;
 
-    console.log(content);
-  });
+  //     console.log(content);
+  //   }
+  // );
+
+  // await index.deleteObject("707374312", function(err, content) {
+  //   if (err) throw err;
+
+  //   console.log(content);
+  // });
 
   return {
     headers: {
