@@ -13,39 +13,27 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  const data = JSON.parse(event.body);
-  console.log(data);
+  try {
+    const bookmark = JSON.parse(event.body);
+    var index = client.initIndex(`bookmarks-${bookmark.userId}`);
 
-  // init index with userId
-  // var index = client.initIndex(`bookmarks-${data.userId}`);
+    index.search({ query: bookmark.id }, (err, content) => {
+      if (err) throw err;
+      const objectID = content.hits[0].objectID;
+      index.deleteObject(objectID, (err, content) => {
+        if (err) throw err;
+      });
+    });
 
-  // index.deleteObjects(objectIds, callback);
-
-  // async await????? --> where is the await
-
-  // await index.deleteBy(
-  //   {
-  //     id: "Z1Gcrzx1iBLQ8o80jIFE"
-  //   },
-  //   function(err, content) {
-  //     if (err) throw err;
-
-  //     console.log(content);
-  //   }
-  // );
-
-  // await index.deleteObject("707374312", function(err, content) {
-  //   if (err) throw err;
-
-  //   console.log(content);
-  // });
-
-  return {
-    headers: {
-      "content-type": "application/json",
-      "Access-Control-Allow-Origin": "*"
-    },
-    statusCode: 200,
-    body: `delete item from index`
-  };
+    return {
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      statusCode: 200,
+      body: `Deleted item from index`
+    };
+  } catch (error) {
+    return { statusCode: 500, body: error.toString() };
+  }
 };
