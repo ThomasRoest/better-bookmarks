@@ -1,6 +1,6 @@
 ## Better Bookmarks
 
-A self-hosted, browser independent bookmark manager made with React, Redux, Firebase (Cloud Firestore/ authentication) and Netlify Functions.
+A self-hosted bookmark manager made with React, Redux, Firebase (Cloud Firestore/ authentication), Netlify Functions and Algolia (search).
 
 ## Screenshots
 
@@ -80,20 +80,20 @@ service cloud.firestore {
 
 follow the link to create the index.
 
-10. This project also uses netlify functions, to use it locally run `yarn start:lambda`
-
 ## Netlify Functions & Deploying
 
-Run `yarn build` to create a production build for this project.
+This project uses Netlify functions for additional functionality ( search indexing, getting titles from pages). See [src/lambda/](https://github.com/ThomasRoest/better-bookmarks/blob/master/src/lambda/).
 
-This projects uses netlify functions, see [src/lambda/get-title.js](https://github.com/ThomasRoest/better-bookmarks/blob/master/src/lambda/get-title.js) to get page titles from url's.
+To deploy:
 
-It's not required, but to use this functionality, the only thing you have to do is to deploy your project with Netlify. Netlify will then create the build from src/lambda, as configured in `netlify.toml`.
-
-Make sure you update the authorized domains for authentication in the firebase console (authentication tab)
+- deploy your project with [Netlify](https://www.netlify.com)
+- Set your build environment variables
+- Update the authorized domains for authentication in the firebase console (authentication tab)
 
 ## Search with Algolia
 
-- signup for a free account on algolia.com
-- go to your dashboard
-- Don't use the admin key, go to your dashboard, with addobject and deleteObject permissions.
+To configure search with [Algolia](https://www.algolia.com/)
+
+- signup for a free account on [Algolia.com](https://www.algolia.com/)
+- go to your dashboard and create a new app.
+- Go to api keys and create a new key with the following permissions: `search, addObject, deleteObject`. This will be the key for use with lambda functions. The other keys that you will need are the app ID to identify your app, and the search only key which will be used client-side to search your index.
