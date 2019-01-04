@@ -19,7 +19,7 @@ class ExportFile extends React.Component<Props> {
     const { bookmarks } = this.props;
 
     const exportedBookmarks = bookmarks.map(bookmark => {
-      return { title: bookmark.title, url: bookmark.url };
+      return { title: bookmark.title, url: bookmark.url, tag: bookmark.tag };
     });
 
     const blob = new Blob([JSON.stringify(exportedBookmarks)], {
