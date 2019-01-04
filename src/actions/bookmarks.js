@@ -213,3 +213,22 @@ export const deleteBookmark = (id, userId) => {
     dispatch(deleteAlgoliaItem(id, userId));
   };
 };
+
+export const fetchAllBookmarks = userId => {
+  console.log("fetching all bookmarks");
+  const bookmarkRef = firestore
+    .collection(`users/${userId}/bookmarks`)
+    .orderBy("createdAt", "desc");
+  return dispatch => {
+    dispatch({ type: "LOADING_START" });
+
+    bookmarkRef.get().then(querySnapshot => {
+      const newbookmarks = querySnapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
+
+      dispatch({ type: "LOADING_FINISHED" });
+      dispatch(setBookmarks(newbookmarks));
+    });
+  };
+};

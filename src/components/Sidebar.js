@@ -2,7 +2,6 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
-import ExportFile from "./ExportFile";
 import { connect } from "react-redux";
 import { fetchTags } from "../actions/tags";
 import { queryByTag, fetchBookmarks } from "../actions/bookmarks";
@@ -98,7 +97,7 @@ class Sidebar extends React.Component<Props> {
             <Link to="/tags">Tags</Link>
           </li>
           <li>
-            <ExportFile />
+            <Link to="/export">Export</Link>
           </li>
         </ul>
 

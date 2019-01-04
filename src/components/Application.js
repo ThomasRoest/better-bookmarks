@@ -12,6 +12,7 @@ import EditBookmarkForm from "./EditBookmarkForm";
 import MainHeader from "./MainHeader";
 import TagsPage from "./TagsPage";
 import BookmarksPage from "./BookmarksPage";
+import ExportPage from "./ExportPage";
 import Sidebar from "./Sidebar";
 import DrawerMenu from "./DrawerMenu";
 
@@ -51,6 +52,7 @@ const Application = ({ auth, signIn, menuIsOpen }) => (
                   component={EditBookmarkForm}
                 />
                 <Route exact path="/tags" component={TagsPage} />
+                <Route exact path="/export" component={ExportPage} />
               </Switch>
             </Main>
           </FlexContainer>
