@@ -17,7 +17,12 @@ type Props = {
 class ExportFile extends React.Component<Props> {
   exportData = () => {
     const { bookmarks } = this.props;
-    const blob = new Blob([JSON.stringify(bookmarks)], {
+
+    const exportedBookmarks = bookmarks.map(bookmark => {
+      return { title: bookmark.title, url: bookmark.url };
+    });
+
+    const blob = new Blob([JSON.stringify(exportedBookmarks)], {
       type: "application/json;charset=utf-8"
     });
     FileSaver.saveAs(
