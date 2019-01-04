@@ -8,8 +8,6 @@ var client = algoliasearch(
   process.env.ALGOLIA_API_KEY
 );
 
-// console.log(process.env.REACT_APP_ALGOLIA_APP_ID, process.env.ALGOLIA_API_KEY);
-
 exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
@@ -17,7 +15,6 @@ exports.handler = async (event, context) => {
 
   try {
     const bookmark = JSON.parse(event.body);
-    console.log(bookmark);
     var index = client.initIndex(`bookmarks-${bookmark.userId}`);
     await index.addObjects([bookmark]);
     return {

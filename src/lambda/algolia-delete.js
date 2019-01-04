@@ -16,14 +16,9 @@ exports.handler = async (event, context) => {
   try {
     const bookmark = JSON.parse(event.body);
     var index = client.initIndex(`bookmarks-${bookmark.userId}`);
-
-    index.search({ query: bookmark.id }, (err, content) => {
-      if (err) throw err;
-      const objectID = content.hits[0].objectID;
-      index.deleteObject(objectID, (err, content) => {
-        if (err) throw err;
-      });
-    });
+    const result = await index.search({ query: bookmark.id });
+    const objectID = result.hits[0].objectID;
+    await index.deleteObject(objectID);
 
     return {
       headers: {
