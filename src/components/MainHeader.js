@@ -82,10 +82,7 @@ type Props = {
   auth: Object,
   signIn: Function,
   signOut: Function,
-  searchTerm: string,
-  handleSearchTermChange: Function,
-  toggleDrawerMenu: Function,
-  searchQuery: Function
+  toggleDrawerMenu: Function
 };
 
 type State = {
@@ -93,22 +90,7 @@ type State = {
 };
 
 class MainHeader extends Component<Props, State> {
-  state = {
-    searchTerm: ""
-  };
-
-  handleSearchTermChange = event => {
-    const searchTerm = event.target.value;
-    this.setState({ searchTerm });
-  };
-
-  handleSearchSubmit = event => {
-    event.preventDefault();
-    this.props.searchQuery(this.props.auth.uid, this.state.searchTerm);
-  };
-
   render() {
-    const { signOut, searchTerm } = this.props;
     return (
       <header>
         <HeaderTop>
@@ -126,17 +108,6 @@ class MainHeader extends Component<Props, State> {
 
           <div className="search-controls">
             <Search />
-            {/* <form onSubmit={this.handleSearchSubmit}>
-              <div className="flex-container">
-                <input
-                  type="search"
-                  placeholder="Search..."
-                  value={searchTerm}
-                  onChange={e => this.handleSearchTermChange(e)}
-                />
-                <input type="submit" value="search" />
-              </div>
-            </form> */}
           </div>
         </HeaderTop>
 
