@@ -4,7 +4,7 @@ A self-hosted bookmark manager made with React, Redux, Firebase (Cloud Firestore
 
 ## Screenshots
 
-![HOME](/public/bbgif.gif)
+![HOME](/public/gifv2.gif)
 
 ![HOME](/public/screenshot_home2.png)
 
