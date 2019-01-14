@@ -4,13 +4,15 @@ A self-hosted bookmark manager made with React, Redux, Firebase (Cloud Firestore
 
 ## Screenshots
 
+![HOME](/public/bbgif.gif)
+
 ![HOME](/public/screenshot_home2.png)
 
-> bookmarks
+<!-- > bookmarks -->
 
-<img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-23+at+02.43+PM.gif" />
+<!-- <img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-23+at+02.43+PM.gif" />
 
-<img height="400px" src="https://s3-eu-west-1.amazonaws.com/github-images123/bb+mobile+gif.gif" />
+<img height="400px" src="https://s3-eu-west-1.amazonaws.com/github-images123/bb+mobile+gif.gif" /> -->
 
 ## Setup
 
