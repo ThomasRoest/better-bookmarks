@@ -29,49 +29,42 @@ type Props = {
   auth: Object
 };
 
-class TagsPage extends Component<Props> {
-  componentDidMount() {
-    this.props.fetchTags(this.props.auth.uid);
-  }
+const TagsPage = ({ tags, setFilter, deleteTag, auth }) => {
+  return (
+    <StyledTagList>
+      <NewTagForm />
+      <table className="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th className="table-header">all tags</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {tags.map(tag => (
+            <tr key={tag.id}>
+              <td>
+                <Link to="/" onClick={() => setFilter(tag.title)}>
+                  {tag.title}
+                </Link>
+              </td>
 
-  render() {
-    return (
-      <StyledTagList>
-        <NewTagForm />
-        <table className="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th className="table-header">all tags</th>
-              <th />
+              <td>
+                <button
+                  className="btn btn-sm btn-error"
+                  onClick={() => deleteTag(tag.id, auth.uid)}
+                >
+                  delete
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {this.props.tags.map(tag => (
-              <tr key={tag.id}>
-                <td>
-                  <Link to="/" onClick={() => this.props.setFilter(tag.title)}>
-                    {tag.title}
-                  </Link>
-                </td>
+          ))}
+        </tbody>
+      </table>
+    </StyledTagList>
+  );
+};
 
-                <td>
-                  <button
-                    className="btn btn-sm btn-error"
-                    onClick={() =>
-                      this.props.deleteTag(tag.id, this.props.auth.uid)
-                    }
-                  >
-                    delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </StyledTagList>
-    );
-  }
-}
 const mapStateToProps = ({ tags, auth }) => {
   return { tags, auth };
 };

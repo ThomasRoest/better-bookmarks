@@ -45,32 +45,36 @@ type Props = {
   lastBookmark: Number
 };
 
-class BookmarksList extends React.Component<Props> {
-  handleLoadMore = e => {
-    const { auth, lastBookmark } = this.props;
-    this.props.loadMore(auth.uid, lastBookmark);
+const BookmarksList = ({
+  bookmarks,
+  deleteBookmark,
+  loadMore,
+  searchTerm,
+  tagFilter,
+  auth,
+  lastBookmark
+}) => {
+  const handleLoadMore = e => {
+    loadMore(auth.uid, lastBookmark);
   };
 
-  render() {
-    const { bookmarks, deleteBookmark } = this.props;
-    return (
-      <StyledList>
-        {bookmarks.map(item => (
-          <BookmarkListItem
-            key={item.id}
-            {...item}
-            deleteBookmark={deleteBookmark}
-          />
-        ))}
-        {this.props.tagFilter === "default" && (
-          <div className="button-container">
-            <Button onClick={this.handleLoadMore}>load more</Button>
-          </div>
-        )}
-      </StyledList>
-    );
-  }
-}
+  return (
+    <StyledList>
+      {bookmarks.map(item => (
+        <BookmarkListItem
+          key={item.id}
+          {...item}
+          deleteBookmark={deleteBookmark}
+        />
+      ))}
+      {tagFilter === "default" && (
+        <div className="button-container">
+          <Button onClick={handleLoadMore}>load more</Button>
+        </div>
+      )}
+    </StyledList>
+  );
+};
 
 const mapStateToProps = state => {
   return {
