@@ -29,7 +29,7 @@ type Props = {
   auth: Object
 };
 
-const TagsPage = ({ tags, setFilter, deleteTag, auth }) => {
+const TagsPage = ({ tags, setFilter, deleteTag, auth }: Props) => {
   return (
     <StyledTagList>
       <NewTagForm />

@@ -4,12 +4,17 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const Tag = styled.span`
+  margin-left: 10px;
+`;
+
 const StyledListItem = styled.li`
   background-color: white;
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  padding: 0px 5px 8px 10px;
+  padding: 0.2rem 0.5rem;
+  /* padding: 0px 5px 8px 15px; */
   border-bottom: 1px solid lightgray;
 
   a {
@@ -99,8 +104,11 @@ class BookmarkListItem extends Component<Props, State> {
           <React.Fragment>
             <BookmarkInfo>
               <a href={url}>{title}</a>
-              <br />
-              <span className="label label-ro label-default">{tag}</span>
+              {/* <br /> */}
+              <Tag>
+                <span className="label label-ro label-default">{tag}</span>
+              </Tag>
+
               {pinned && (
                 <span className="label label-runded label-success">pinned</span>
               )}

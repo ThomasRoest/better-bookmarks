@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 const StyledSidebar = styled.aside`
   background-color: #fafafa;
   flex: 1 1 15%;
+  padding: 1rem;
   min-height: 100vh;
   ul {
     list-style-type: none;
@@ -21,26 +22,45 @@ const StyledSidebar = styled.aside`
   }
 `;
 
+// &:hover {
+//   color: #1665d8;
+//   background-color: rgba(84, 147, 245, 0.1);
+// }
+// &:active {
+//   transform: scale(0.99);
+//   background-color: #1665d8;
+//   color: white;
+// }
+
+const StyledActions = styled.ul`
+  list-style-type: none;
+  padding: 10px;
+  margin: 0 0 20px 0;
+`;
+
 const StyledTagsList = styled.ul`
   list-style-type: none;
-  padding: 0;
+  padding: 10px;
+  margin: 0;
   button {
-    display: block;
-    margin-top: 5px;
+    margin-bottom: 2px;
   }
 `;
 
 const SidebarButton = styled.button`
-  background-color: white;
+  background-color: #fafafa;
+  width: 100%;
   border-radius: 3px;
-  border: 1px solid hsla(191, 76%, 37%, 1);
-  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  border: 0px;
+  padding: 0.1rem 0.1rem 0.1rem 0.4rem;
+  /* border: 1px solid hsla(191, 76%, 37%, 1); */
+  /* box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2); */
   color: #5755d9;
   font-size: 0.7rem;
-
+  text-align: left;
   transition: 0.2s all;
   &:hover {
-    background-color: #5755d9;
+    background-color: #1665d8;
     color: white;
     cursor: pointer;
   }
@@ -86,12 +106,12 @@ class Sidebar extends React.Component<Props> {
   render() {
     return (
       <StyledSidebar>
-        <ul>
+        <StyledActions>
           <li>
             <Link to="/">All bookmarks</Link>
           </li>
           <li>
-            <Link to="/bookmarks/new">New bookmark +</Link>
+            <Link to="/bookmarks/new">New bookmark</Link>
           </li>
           <li>
             <Link to="/tags">Tags</Link>
@@ -99,7 +119,7 @@ class Sidebar extends React.Component<Props> {
           <li>
             <Link to="/export">Export</Link>
           </li>
-        </ul>
+        </StyledActions>
 
         <StyledTagsList>
           <b>tags</b>
