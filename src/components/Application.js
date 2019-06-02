@@ -19,6 +19,8 @@ import DrawerMenu from "./DrawerMenu";
 const FlexContainer = styled.div`
   @media (min-width: 579px) {
     display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
   }
 `;
 

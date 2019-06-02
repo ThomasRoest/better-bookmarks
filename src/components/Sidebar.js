@@ -9,7 +9,7 @@ import { setFilter } from "../actions/filters";
 import { Link } from "react-router-dom";
 
 const StyledSidebar = styled.aside`
-  background-color: #f8f9fa;
+  background-color: #fafafa;
   flex: 1 1 15%;
   min-height: 100vh;
   ul {

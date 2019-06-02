@@ -9,10 +9,16 @@ import { searchQuery } from "../actions/bookmarks";
 import { toggleDrawerMenu } from "../actions/menuState";
 import Search from "./Search";
 
+const StyledHeader = styled.header`
+  background-color: #5755d9;
+`;
+
 const HeaderTop = styled.div`
   background-color: #5755d9;
   display: flex;
   padding: 10px;
+  max-width: 1000px;
+  margin: 0 auto;
   justify-content: space-between;
   align-items: center;
   .title-section {
@@ -92,7 +98,7 @@ type State = {
 class MainHeader extends Component<Props, State> {
   render() {
     return (
-      <header>
+      <StyledHeader>
         <HeaderTop>
           <div className="title-section">
             <Link to="/">
@@ -116,7 +122,7 @@ class MainHeader extends Component<Props, State> {
           <Link to="/bookmarks/new">New bookmark</Link>
           <Link to="/tags">tags</Link>
         </HeaderNav>
-      </header>
+      </StyledHeader>
     );
   }
 }
