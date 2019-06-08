@@ -15,6 +15,13 @@ import BookmarksPage from "./BookmarksPage";
 import ExportPage from "./ExportPage";
 import Sidebar from "./Sidebar";
 import DrawerMenu from "./DrawerMenu";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #fafafa;
+  }
+`;
 
 const FlexContainer = styled.div`
   @media (min-width: 579px) {
@@ -26,6 +33,7 @@ const FlexContainer = styled.div`
 
 const Main = styled.main`
   flex: 1 1 85%;
+  background-color: white;
 `;
 
 const Application = ({ auth, signIn, menuIsOpen }) => (
@@ -41,6 +49,7 @@ const Application = ({ auth, signIn, menuIsOpen }) => (
             <Sidebar />
 
             <Main>
+              <GlobalStyle />
               <Switch>
                 <Route exact path="/" component={BookmarksPage} />
                 <Route

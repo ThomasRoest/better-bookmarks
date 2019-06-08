@@ -8,7 +8,6 @@ import initialState from "./initial-state";
 import "spectre.css/dist/spectre.min.css";
 import "spectre.css/dist/spectre-icons.css";
 import Application from "./components/Application";
-
 import { startListeningToAuthChanges } from "./actions/auth";
 
 const middleware = [thunk];
