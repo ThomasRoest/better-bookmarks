@@ -18,7 +18,7 @@
   "theme_color": "#833582",
   "background_color": "#6678FF",
   "share_target": {
-    "action": "/bookmarks/new/",
+    "action": "/",
     "method": "GET",
     "enctype": "application/x-www-form-urlencoded",
     "params": {
