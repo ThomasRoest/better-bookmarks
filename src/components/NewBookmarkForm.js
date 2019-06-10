@@ -57,6 +57,12 @@ class NewBookmarkForm extends Component<Props, State> {
 
   componentDidMount() {
     this.props.fetchTags(this.props.auth.uid);
+
+    const parsedUrl: any = new URL(window.location);
+    // searchParams.get() will properly handle decoding the values.
+    console.log("Title shared: " + parsedUrl.searchParams.get("title"));
+    console.log("Text shared: " + parsedUrl.searchParams.get("text"));
+    console.log("URL shared: " + parsedUrl.searchParams.get("url"));
   }
 
   handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
