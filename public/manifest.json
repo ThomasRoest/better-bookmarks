@@ -20,7 +20,7 @@
   "share_target": {
     "action": "bookmarks/new",
     "method": "GET",
-    "enctype": "text/plain",
+    "enctype": "application/x-www-form-urlencoded",
     "params": {
       "text": "text"
     }
