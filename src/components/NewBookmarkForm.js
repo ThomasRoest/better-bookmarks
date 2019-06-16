@@ -34,7 +34,8 @@ type State = {
   tag: string,
   pinned: boolean,
   errors: Object,
-  isLoading: boolean
+  isLoading: boolean,
+  params: string
 };
 
 type Props = {
@@ -52,17 +53,13 @@ class NewBookmarkForm extends Component<Props, State> {
     tag: "",
     pinned: false,
     errors: {},
-    isLoading: false
+    isLoading: false,
+    params: null
   };
 
   componentDidMount() {
     this.props.fetchTags(this.props.auth.uid);
-
-    const parsedUrl: any = new URL(window.location);
-    // searchParams.get() will properly handle decoding the values.
-    console.log("Title shared: " + parsedUrl.searchParams.get("title"));
-    console.log("Text shared: " + parsedUrl.searchParams.get("text"));
-    console.log("URL shared: " + parsedUrl.searchParams.get("url"));
+    this.getParams();
   }
 
   handleChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
@@ -125,6 +122,14 @@ class NewBookmarkForm extends Component<Props, State> {
     }
   };
 
+  getParams = () => {
+    const parsedUrl = new URL(window.location);
+    const text: string = parsedUrl.searchParams.get("text");
+    console.log("Text shared: " + parsedUrl.searchParams.get("text"));
+    console.log("URL shared: " + parsedUrl.searchParams.get("url"));
+    this.setState({ params: text });
+  };
+
   render() {
     return (
       <StyledForm onSubmit={this.handleSubmit}>
@@ -134,7 +139,13 @@ class NewBookmarkForm extends Component<Props, State> {
             <div className="loading loading-lg" />
           </div>
         )}
+
+        <div />
         <h3>Add new Bookmark</h3>
+        <p>
+          test params:
+          {this.state.params}
+        </p>
         <div>
           <label htmlFor="url">url</label>
           {this.state.errors.url && (
