@@ -124,10 +124,12 @@ class NewBookmarkForm extends Component<Props, State> {
 
   getParams = () => {
     const parsedUrl = new URL(window.location);
-    const text: string = parsedUrl.searchParams.get("text");
-    console.log("Text shared: " + parsedUrl.searchParams.get("text"));
-    console.log("URL shared: " + parsedUrl.searchParams.get("url"));
-    this.setState({ params: text });
+    const params: any = {
+      text: parsedUrl.searchParams.get("text"),
+      url: parsedUrl.searchParams.get("url"),
+      title: parsedUrl.searchParams.get("title")
+    };
+    this.setState({ params });
   };
 
   render() {
@@ -144,7 +146,9 @@ class NewBookmarkForm extends Component<Props, State> {
         <h3>Add new Bookmark</h3>
         <p>
           test params:
-          {this.state.params}
+          <pre>
+            <code>{JSON.stringify(this.state.params, null, 2)}</code>
+          </pre>
         </p>
         <div>
           <label htmlFor="url">url</label>
