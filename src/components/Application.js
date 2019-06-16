@@ -20,6 +20,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #fafafa;
+    font-size: 16px;
   }
 `;
 
