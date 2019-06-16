@@ -2,31 +2,11 @@
 
 import React, { Component } from "react";
 import axios from "axios";
-import { LAMBDA_ENDPOINT } from "../config.js";
+import { LAMBDA_ENDPOINT } from "../../config";
 import { connect } from "react-redux";
-import { createBookmark } from "../actions/bookmarks";
-import { fetchTags } from "../actions/tags";
-import styled from "styled-components";
-
-const StyledForm = styled.form`
-  padding: 1.5rem;
-  max-width: 600px;
-  box-shadow: 0px 5px 5px lightgrey;
-  margin: 0 auto 0 auto;
-  .form-input,
-  select {
-    border-radius: 0px;
-    padding-left: 0px;
-    border-top: 0px;
-    border-right: 0px;
-    border-left: 0px;
-    border-bottom: 1px solid blue;
-    margin-bottom: 20px;
-  }
-  @media (min-width: 579px) {
-    margin-top: 10px;
-  }
-`;
+import { createBookmark } from "../../actions/bookmarks";
+import { fetchTags } from "../../actions/tags";
+import { StyledForm } from "./styles";
 
 type State = {
   title: string,
@@ -35,7 +15,7 @@ type State = {
   pinned: boolean,
   errors: Object,
   isLoading: boolean,
-  params: string
+  params: null | Object
 };
 
 type Props = {
@@ -79,23 +59,19 @@ class NewBookmarkForm extends Component<Props, State> {
     if (title === "") errors.title = "title is required";
     if (url === "") errors.url = "url is required";
     if (tag === "") errors.tag = "tag is required";
-
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
   handleSubmit = event => {
     event.preventDefault();
-
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
-
     if (!errors) {
       const { title, url, tag, pinned } = this.state;
       const createdAt = Math.floor(Date.now() / 1000);
       const userId = this.props.auth.uid;
       const bookmark = { title, url, tag, pinned, createdAt, userId };
-
       this.props.createBookmark(bookmark);
       this.setState({ title: "", url: "", tag: "" });
     }
@@ -103,11 +79,9 @@ class NewBookmarkForm extends Component<Props, State> {
 
   getTitle = async url => {
     this.setState({ isLoading: true });
-
     const obj = {
       url: url
     };
-
     try {
       let response = await axios.post(
         `${LAMBDA_ENDPOINT}get-title`,
@@ -129,7 +103,10 @@ class NewBookmarkForm extends Component<Props, State> {
       url: parsedUrl.searchParams.get("url"),
       title: parsedUrl.searchParams.get("title")
     };
-    this.setState({ params });
+    this.setState({ params, url: params.text });
+    if (params.text && params.text.length > 0) {
+      this.getTitle(params.text);
+    }
   };
 
   render() {
