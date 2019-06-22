@@ -2,17 +2,11 @@
 
 A self-hosted bookmark manager made with React, Redux, Firebase (Cloud Firestore/ authentication), Netlify Functions and Algolia (search).
 
+This project uses several PWA features, including the [share target api.](https://developers.google.com/web/updates/2018/12/web-share-target) So after you've installed the app to your homescreen, you can share urls from your browser like you would with any other app (only tested on Android).
+
 ## Screenshots
 
-![HOME](/public/gifv2.gif)
-
 ![HOME](/public/screenshot_home2.png)
-
-<!-- > bookmarks -->
-
-<!-- <img src="https://s3-eu-west-1.amazonaws.com/github-images123/Screen+Recording+2018-10-23+at+02.43+PM.gif" />
-
-<img height="400px" src="https://s3-eu-west-1.amazonaws.com/github-images123/bb+mobile+gif.gif" /> -->
 
 ## Setup
 
