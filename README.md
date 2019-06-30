@@ -6,7 +6,9 @@ This project uses several PWA features, including the [share target api.](https:
 
 ## Screenshots
 
-![HOME](/public/screenshot_home2.png)
+<!-- ![HOME](/public/screenshot_home2.png) -->
+
+![HOME](/public/screenshot3.png)
 
 ## Setup
 

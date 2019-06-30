@@ -121,12 +121,6 @@ class NewBookmarkForm extends Component<Props, State> {
 
         <div />
         <h3>Add new Bookmark</h3>
-        <p>
-          test params:
-          <pre>
-            <code>{JSON.stringify(this.state.params, null, 2)}</code>
-          </pre>
-        </p>
         <div>
           <label htmlFor="url">url</label>
           {this.state.errors.url && (
