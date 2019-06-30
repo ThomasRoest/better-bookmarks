@@ -2,15 +2,11 @@
 
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import BookmarksList from "./BookmarksList";
-import LoadingSpinner from "./LoadingSpinner";
-import { fetchBookmarks, deleteBookmark } from "../actions/bookmarks";
-import { loadingStart, loadingFinished } from "../actions/loading";
-import styled from "styled-components";
-
-const StyledBookmarksPage = styled.div`
-  flex-basis: 80%;
-`;
+import BookmarksList from "../BookmarksList";
+import LoadingSpinner from "../LoadingSpinner";
+import { fetchBookmarks, deleteBookmark } from "../../actions/bookmarks";
+import { loadingStart, loadingFinished } from "../../actions/loading";
+import { StyledBookmarksPage } from "./styles";
 
 type Props = {
   bookmarks: Array<Object>,
@@ -28,7 +24,7 @@ const BookmarksPage = ({
 }: Props) => {
   useEffect(() => {
     fetchBookmarks(auth.uid);
-  }, []);
+  }, [auth.uid, fetchBookmarks]);
 
   return (
     <StyledBookmarksPage>
