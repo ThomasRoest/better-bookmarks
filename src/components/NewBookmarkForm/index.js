@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { LAMBDA_ENDPOINT } from "../../config";
 import { connect } from "react-redux";
 import { createBookmark } from "../../actions/bookmarks";
@@ -30,7 +31,7 @@ class NewBookmarkForm extends Component<Props, State> {
   state = {
     title: "",
     url: "",
-    tag: "",
+    tag: "watch-later",
     pinned: false,
     errors: {},
     isLoading: false,
@@ -74,6 +75,9 @@ class NewBookmarkForm extends Component<Props, State> {
       const bookmark = { title, url, tag, pinned, createdAt, userId };
       this.props.createBookmark(bookmark);
       this.setState({ title: "", url: "", tag: "" });
+      toast.success("Bookmark added!", {
+        position: toast.POSITION.BOTTOM_CENTER
+      });
     }
   };
 
@@ -163,7 +167,6 @@ class NewBookmarkForm extends Component<Props, State> {
             value={this.state.tag}
             onChange={this.handleChange}
           >
-            <option value="" />
             {this.props.tagOptions.map(tag => (
               <option key={tag.id} value={tag.title}>
                 {tag.title}

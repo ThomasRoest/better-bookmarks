@@ -4,6 +4,8 @@ import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { signIn } from "../actions/auth";
 import SignIn from "./SignIn";
 import Loading from "./Loading";
@@ -70,6 +72,7 @@ const Application = ({ auth, signIn, menuIsOpen }) => (
           </FlexContainer>
         </React.Fragment>
       )}
+      <ToastContainer />
     </React.Fragment>
   </Router>
 );
