@@ -16,7 +16,7 @@ import TagsPage from "./TagsPage";
 import BookmarksPage from "../components/BookmarksPage";
 import ExportPage from "./ExportPage";
 import Sidebar from "./Sidebar";
-import DrawerMenu from "./DrawerMenu";
+import DrawerMenu from "../components/DrawerMenu";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
