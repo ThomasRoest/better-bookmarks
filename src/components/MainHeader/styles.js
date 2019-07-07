@@ -65,11 +65,14 @@ export const StyledNavLink = styled(NavLink)`
     border-bottom: 3px solid white;
     text-decoration: none;
   }
+  &:active {
+    outline: none;
+  }
 `;
 
 export const HeaderNav = styled.nav`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #5755d9;
   text-transform: uppercase;
   font-size: 0.7rem;

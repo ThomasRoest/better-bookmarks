@@ -20,11 +20,11 @@ type State = {
 };
 
 type Props = {
-  createBookmark: Function,
-  createAlgoliaItem: Function,
+  createBookmark: (bookmark: Object) => void,
+  createAlgoliaItem: () => void,
   tagOptions: Array<Object>,
   auth: Object,
-  fetchTags: Function
+  fetchTags: (uid: string) => void
 };
 
 class NewBookmarkForm extends Component<Props, State> {

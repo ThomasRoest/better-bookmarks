@@ -1,6 +1,6 @@
 //@flow
 
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchTags } from "../../actions/tags";
 import { queryByTag, fetchBookmarks } from "../../actions/bookmarks";
@@ -15,82 +15,83 @@ import {
   SidebarButton
 } from "./styles";
 
-type Props = {
-  auth: Object,
-  fetchTags: Function,
-  setFilter: Function,
-  tags: Array<Object>,
-  filters: Object,
-  queryByTag: Function,
-  fetchBookmarks: Function
-};
-
-class Sidebar extends React.Component<Props> {
-  componentDidMount() {
-    this.props.fetchTags(this.props.auth.uid);
-  }
-
-  handleTagQuery = query => {
-    this.props.queryByTag(this.props.auth.uid, query);
-    this.props.setFilter(query);
-  };
-
-  getAllBookmarks = () => {
-    this.props.fetchBookmarks(this.props.auth.uid);
-    this.props.setFilter("default");
-  };
-
-  render() {
-    return (
-      <StyledSidebar>
-        <StyledActions>
-          <StyledListItem>
-            <IconBookmarks />
-            <Link to="/">All</Link>
-          </StyledListItem>
-          <StyledListItem>
-            <IconAdd />
-            <Link to="/bookmarks/new">New</Link>
-          </StyledListItem>
-          <StyledListItem>
-            <IconTag />
-            <Link to="/tags">Tags</Link>
-          </StyledListItem>
-          <StyledListItem>
-            <IconExport />
-            <Link to="/export">Export</Link>
-          </StyledListItem>
-        </StyledActions>
-
-        <StyledTagsList>
-          <b>tags</b>
-          <li>
-            <SidebarButton
-              onClick={this.getAllBookmarks}
-              isActive={
-                this.props.filters.tagFilter === "default" ? true : false
-              }
-            >
-              All
-            </SidebarButton>
-          </li>
-          {this.props.tags.map(item => (
-            <SidebarButton
-              key={item.id}
-              title={item.title}
-              onClick={e => this.handleTagQuery(item.title)}
-              isActive={
-                this.props.filters.tagFilter === item.title ? true : false
-              }
-            >
-              {item.title}
-            </SidebarButton>
-          ))}
-        </StyledTagsList>
-      </StyledSidebar>
-    );
-  }
+interface IProps {
+  auth: Object;
+  fetchTags: (uid: string) => void;
+  setFilter: (query: string) => void;
+  tags: Array<Object>;
+  filters: Object;
+  queryByTag: (uid: string, query: string) => void;
+  fetchBookmarks: (uid: string) => void;
 }
+
+const Sidebar = ({
+  auth,
+  fetchTags,
+  setFilter,
+  tags,
+  filters,
+  queryByTag,
+  fetchBookmarks
+}: IProps) => {
+  useEffect(() => {
+    fetchTags(auth.uid);
+  }, [fetchTags, auth.uid]);
+
+  const handleTagQuery = query => {
+    queryByTag(auth.uid, query);
+    setFilter(query);
+  };
+
+  const getAllBookmarks = () => {
+    fetchBookmarks(auth.uid);
+    setFilter("default");
+  };
+
+  return (
+    <StyledSidebar>
+      <StyledActions>
+        <StyledListItem>
+          <IconBookmarks />
+          <Link to="/">All</Link>
+        </StyledListItem>
+        <StyledListItem>
+          <IconAdd />
+          <Link to="/bookmarks/new">New</Link>
+        </StyledListItem>
+        <StyledListItem>
+          <IconTag />
+          <Link to="/tags">Tags</Link>
+        </StyledListItem>
+        <StyledListItem>
+          <IconExport />
+          <Link to="/export">Export</Link>
+        </StyledListItem>
+      </StyledActions>
+      <StyledTagsList>
+        <b>tags</b>
+        <li>
+          <SidebarButton
+            onClick={getAllBookmarks}
+            isActive={filters.tagFilter === "default" ? true : false}
+          >
+            All
+          </SidebarButton>
+        </li>
+        {tags.map(item => (
+          <SidebarButton
+            key={item.id}
+            title={item.title}
+            onClick={e => handleTagQuery(item.title)}
+            isActive={filters.tagFilter === item.title ? true : false}
+          >
+            {item.title}
+          </SidebarButton>
+        ))}
+      </StyledTagsList>
+    </StyledSidebar>
+  );
+};
 
 const mapStateToProps = ({ tags, auth, filters }) => {
   return { tags, auth, filters };

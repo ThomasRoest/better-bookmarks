@@ -10,8 +10,8 @@ import { StyledBookmarksPage } from "./styles";
 
 type Props = {
   bookmarks: Array<Object>,
-  fetchBookmarks: Function,
-  deleteBookmark: Function,
+  fetchBookmarks: (uid: string) => void,
+  deleteBookmark: () => void,
   auth: Object,
   isLoading: string
 };
