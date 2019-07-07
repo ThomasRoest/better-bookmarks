@@ -8,20 +8,20 @@ import { fetchBookmarks, deleteBookmark } from "../../actions/bookmarks";
 import { loadingStart, loadingFinished } from "../../actions/loading";
 import { StyledBookmarksPage } from "./styles";
 
-type Props = {
-  bookmarks: Array<Object>,
-  fetchBookmarks: (uid: string) => void,
-  deleteBookmark: () => void,
-  auth: Object,
-  isLoading: string
-};
+interface IProps {
+  bookmarks: Array<Object>;
+  fetchBookmarks: (uid: string) => void;
+  deleteBookmark: () => void;
+  auth: Object;
+  isLoading: string;
+}
 
 const BookmarksPage = ({
   fetchBookmarks,
   auth,
   isLoading,
   deleteBookmark
-}: Props) => {
+}: IProps) => {
   useEffect(() => {
     fetchBookmarks(auth.uid);
   }, [auth.uid, fetchBookmarks]);
