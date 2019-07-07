@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const StyledHeader = styled.header`
   background-color: #5755d9;
@@ -54,22 +55,25 @@ export const HeaderTop = styled.div`
   }
 `;
 
+export const StyledNavLink = styled(NavLink)`
+  padding: 0.6rem;
+  display: block;
+  color: lightgrey !important;
+  &.active {
+    color: white !important;
+    font-weight: bold;
+    border-bottom: 3px solid white;
+    text-decoration: none;
+  }
+`;
+
 export const HeaderNav = styled.nav`
   display: flex;
   justify-content: space-around;
   background-color: #5755d9;
-  padding: 5px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
   align-items: center;
-  a {
-    font-weight: 500;
-    color: white !important;
-    &:active,
-    &:visited,
-    &:hover {
-      text-decoration: none;
-    }
-  }
-
   @media (min-width: 576px) {
     display: none;
   }

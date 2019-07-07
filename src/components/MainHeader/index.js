@@ -7,7 +7,7 @@ import { signIn, signOut } from "../../actions/auth";
 import { searchQuery } from "../../actions/bookmarks";
 import { toggleDrawerMenu } from "../../actions/menuState";
 import Search from "../Search";
-import { StyledHeader, HeaderNav, HeaderTop } from "./styles";
+import { StyledHeader, HeaderNav, HeaderTop, StyledNavLink } from "./styles";
 
 type Props = {
   auth: Object,
@@ -37,9 +37,15 @@ const MainHeader = ({ toggleDrawerMenu }: Props) => (
     </HeaderTop>
 
     <HeaderNav>
-      <Link to="/">Bookmarks</Link>
-      <Link to="/bookmarks/new">New bookmark</Link>
-      <Link to="/tags">tags</Link>
+      <StyledNavLink exact to="/">
+        Bookmarks
+      </StyledNavLink>
+      <StyledNavLink exact to="/bookmarks/new">
+        New bookmark
+      </StyledNavLink>
+      <StyledNavLink exact to="/tags">
+        tags
+      </StyledNavLink>
     </HeaderNav>
   </StyledHeader>
 );

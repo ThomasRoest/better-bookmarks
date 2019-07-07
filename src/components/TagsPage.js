@@ -1,8 +1,8 @@
 //@flow
 
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import NewTagForm from "./NewTagForm";
+import NewTagForm from "../components/NewTagForm";
 import { Link } from "react-router-dom";
 import { fetchTags, deleteTag } from "../actions/tags";
 import { setFilter } from "../actions/filters";
