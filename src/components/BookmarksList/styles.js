@@ -27,4 +27,9 @@ export const StyledList = styled.ul`
     padding: 1rem;
     text-align: center;
   }
+  /* margin-bottom: 2.4rem; */
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  min-height: 80vh;
 `;

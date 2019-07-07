@@ -13,8 +13,7 @@ const StyledListItem = styled.li`
   list-style-type: none;
   display: flex;
   justify-content: space-between;
-  padding: 0.2rem 0.5rem;
-  /* padding: 0px 5px 8px 15px; */
+  padding: 0.2rem 0.6rem;
   border-bottom: 1px solid lightgray;
 
   a {
@@ -32,6 +31,10 @@ const StyledListItem = styled.li`
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+  }
+
+  @media (min-width: 600px) {
+    padding: 0.4rem 1rem;
   }
 `;
 

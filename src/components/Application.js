@@ -36,7 +36,7 @@ const FlexContainer = styled.div`
 
 const Main = styled.main`
   flex: 1 1 85%;
-  background-color: white;
+  background-color: #fafafa;
 `;
 
 const Application = ({ auth, signIn, menuIsOpen }) => (
