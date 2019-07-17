@@ -168,20 +168,6 @@ export const createBookmark = bookmark => {
   };
 };
 
-export const updateBookmark = bookmark => {
-  const bookmarkRef = firestore.collection(
-    `users/${bookmark.userId}/bookmarks`
-  );
-  return dispatch => {
-    bookmarkRef.doc(bookmark.id).update({
-      title: bookmark.title,
-      url: bookmark.url,
-      tag: bookmark.tag,
-      pinned: bookmark.pinned
-    });
-  };
-};
-
 export const fetchBookmark = (id, userId) => {
   const bookmarkRef = firestore.collection(`users/${userId}/bookmarks`);
   return dispatch => {

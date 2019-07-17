@@ -10,7 +10,7 @@ import { signIn } from "../actions/auth";
 import SignIn from "./SignIn";
 import Loading from "./Loading";
 import NewBookmarkForm from "./NewBookmarkForm";
-import EditBookmarkForm from "./EditBookmarkForm";
+import EditBookmarkForm from "../components/EditBookmarkForm";
 import MainHeader from "../components/MainHeader";
 import TagsPage from "./TagsPage";
 import BookmarksPage from "../components/BookmarksPage";
