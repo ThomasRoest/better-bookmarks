@@ -7,9 +7,10 @@ import LoadingSpinner from "../LoadingSpinner";
 import { fetchBookmarks, deleteBookmark } from "../../actions/bookmarks";
 import { loadingStart, loadingFinished } from "../../actions/loading";
 import { StyledBookmarksPage } from "./styles";
+import { IBookmark } from "../../types";
 
 interface IProps {
-  bookmarks: Array<Object>;
+  bookmarks: IBookmark[];
   fetchBookmarks: (uid: string) => void;
   deleteBookmark: () => void;
   auth: Object;

@@ -1,10 +1,10 @@
 //@flow
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledListItem, Actions, BookmarkInfo, Tag } from "./styles";
 
-type Props = {
+type IProps = {
   id: string,
   title: string,
   url: string,
@@ -14,63 +14,51 @@ type Props = {
   pinned: boolean
 };
 
-type State = {
-  editView: boolean
-};
+const BookmarkListItem = (props: IProps) => {
+  const [editView, setEditView] = useState(false);
 
-class BookmarkListItem extends Component<Props, State> {
-  state = {
-    editView: false
+  const handleClick = () => {
+    setEditView(!editView);
   };
 
-  handleClick = () => {
-    this.setState(state => ({
-      editView: !state.editView
-    }));
-  };
-
-  render() {
-    const { id, title, url, tag, deleteBookmark, userId, pinned } = this.props;
-
-    return (
-      <StyledListItem>
-        {this.state.editView && (
-          <React.Fragment>
-            <Actions>
-              <Link className="btn btn-sm" to={`/bookmarks/${id}`}>
-                Edit
-              </Link>
-
-              <button
-                className="btn btn-sm btn-error"
-                onClick={() => deleteBookmark(id, userId)}
-              >
-                delete
-              </button>
-            </Actions>
-            <button className="btn btn-sm" onClick={this.handleClick}>
-              X
+  const { id, title, url, tag, deleteBookmark, userId, pinned } = props;
+  return (
+    <StyledListItem>
+      {editView && (
+        <React.Fragment>
+          <Actions>
+            <Link className="btn btn-sm" to={`/bookmarks/${id}`}>
+              Edit
+            </Link>
+            <button
+              className="btn btn-sm btn-error"
+              onClick={() => deleteBookmark(id, userId)}
+            >
+              delete
             </button>
-          </React.Fragment>
-        )}
-        {!this.state.editView && (
-          <React.Fragment>
-            <BookmarkInfo>
-              <a href={url}>{title}</a>
-              <Tag>
-                <span className="label label-ro label-default">{tag}</span>
-              </Tag>
+          </Actions>
+          <button className="btn btn-sm" onClick={handleClick}>
+            X
+          </button>
+        </React.Fragment>
+      )}
+      {!editView && (
+        <React.Fragment>
+          <BookmarkInfo>
+            <a href={url}>{title}</a>
+            <Tag>
+              <span className="label label-ro label-default">{tag}</span>
+            </Tag>
 
-              {pinned && (
-                <span className="label label-runded label-success">pinned</span>
-              )}
-            </BookmarkInfo>
-            <i className="icon icon-more-vert" onClick={this.handleClick} />
-          </React.Fragment>
-        )}
-      </StyledListItem>
-    );
-  }
-}
+            {pinned && (
+              <span className="label label-runded label-success">pinned</span>
+            )}
+          </BookmarkInfo>
+          <i className="icon icon-more-vert" onClick={handleClick} />
+        </React.Fragment>
+      )}
+    </StyledListItem>
+  );
+};
 
 export default BookmarkListItem;
