@@ -1,6 +1,7 @@
 //@flow
 
 import React, { useEffect, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
 import { connect } from "react-redux";
 import { fetchTags } from "../../actions/tags";
@@ -9,15 +10,15 @@ import bookmarks from "../../api/bookmarks";
 import { TextInput } from "../Inputs";
 import { TagsInput } from "../Inputs/TagsInput";
 import LoadingSpinner from "../LoadingSpinner";
-import { IBookmark } from "../../types";
+import { IBookmark, ITag, IAuth } from "../../types";
 
 interface IProps {
   bookmark: IBookmark;
   fetchTags: () => void;
-  tagOptions: Array<Object>;
-  auth: Object;
-  match: any;
-  history: any;
+  tagOptions: ITag[];
+  auth: IAuth;
+  match: RouteComponentProps;
+  history: RouteComponentProps;
 }
 
 const EditBookmarkForm = ({ match, history, auth }: IProps) => {

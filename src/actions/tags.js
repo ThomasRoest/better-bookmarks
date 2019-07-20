@@ -8,6 +8,7 @@ export const addTag = (id, tag) => {
 };
 
 export const setTags = tags => {
+  console.log(tags);
   return {
     type: "SET_TAGS",
     tags

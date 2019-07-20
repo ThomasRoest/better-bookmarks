@@ -7,13 +7,14 @@ import { setFilter } from "../../actions/filters";
 import { signOut } from "../../actions/auth";
 import { toggleDrawerMenu } from "../../actions/menuState";
 import { Backdrop, StyledMenu, MenuHeader, FilterButton } from "./styles";
+import { IAuth, ITag } from "../../types";
 
 interface IProps {
   queryByTag: (uid: string, query: string) => void;
   setFilter: (query: string) => void;
-  auth: Object;
+  auth: IAuth;
   toggleDrawerMenu: () => void;
-  tags: Array<Object>;
+  tags: ITag[];
   signOut: () => void;
 }
 

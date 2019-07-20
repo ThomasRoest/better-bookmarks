@@ -5,16 +5,17 @@ import BookmarkListItem from "../BookmarkListItem";
 import { loadMore } from "../../actions/bookmarks";
 import { connect } from "react-redux";
 import { Button, StyledList } from "./styles";
+import { IBookmark, IAuth } from "../../types";
 
-type Props = {
-  bookmarks: Array<Object>,
-  deleteBookmark: Function,
-  loadMore: Function,
-  searchTerm: string,
-  tagFilter: string,
-  auth: Object,
-  lastBookmark: Number
-};
+interface IProps {
+  bookmarks: IBookmark[];
+  deleteBookmark: () => void;
+  loadMore: (uid: string, lastBookmark: number) => void;
+  searchTerm: string;
+  tagFilter: string;
+  auth: IAuth;
+  lastBookmark: number;
+}
 
 const BookmarksList = ({
   bookmarks,
@@ -24,7 +25,7 @@ const BookmarksList = ({
   tagFilter,
   auth,
   lastBookmark
-}: Props) => {
+}: IProps) => {
   const handleLoadMore = e => {
     loadMore(auth.uid, lastBookmark);
   };
