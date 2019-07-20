@@ -168,25 +168,6 @@ export const createBookmark = bookmark => {
   };
 };
 
-export const fetchBookmark = (id, userId) => {
-  const bookmarkRef = firestore.collection(`users/${userId}/bookmarks`);
-  return dispatch => {
-    bookmarkRef
-      .doc(id)
-      .get()
-      .then(function(doc) {
-        if (doc.exists) {
-          dispatch(bookmarkFetched(doc.id, doc.data()));
-        } else {
-          return;
-        }
-      })
-      .catch(function(error) {
-        console.log("Error getting document:", error);
-      });
-  };
-};
-
 export const deleteBookmark = (id, userId) => {
   const bookmarkRef = firestore.collection(`users/${userId}/bookmarks`);
   return dispatch => {

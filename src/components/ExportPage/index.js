@@ -1,37 +1,44 @@
 //@flow
 
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchAllBookmarks } from "../../actions/bookmarks";
-import ExportFile from "../ExportPage";
+import ExportFile from "../ExportFile";
 import LoadingSpinner from "../LoadingSpinner";
+import { IBookmark, IAuth } from "../../types";
 
-type Props = {
-  bookmarks: Array<Object>,
-  isLoading: boolean,
-  fetchAllBookmarks: Function,
-  auth: Object
-};
-
-class ExportPage extends Component<Props> {
-  componentDidMount() {
-    this.props.fetchAllBookmarks(this.props.auth.uid);
-  }
-
-  render() {
-    return (
-      <div>
-        <ul>
-          <ExportFile />
-          {this.props.isLoading && <LoadingSpinner />}
-          {this.props.bookmarks.map(item => (
-            <li key={item.id}>{item.title}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+interface IProps {
+  bookmarks: IBookmark[];
+  isLoading: boolean;
+  fetchAllBookmarks: (uid: string) => void;
+  auth: IAuth;
 }
+
+const ExportPage = ({
+  bookmarks,
+  fetchAllBookmarks,
+  auth,
+  isLoading
+}: IProps) => {
+  useEffect(() => {
+    const fetch = () => {
+      fetchAllBookmarks(auth.uid);
+    };
+    fetch();
+  }, [auth.uid, fetchAllBookmarks]);
+
+  return (
+    <div>
+      <ul>
+        <ExportFile />
+        {isLoading && <LoadingSpinner />}
+        {bookmarks.map(item => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const mapStateToProps = ({ auth, bookmarks, isLoading }) => {
   return { auth, bookmarks, isLoading };
