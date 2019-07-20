@@ -2,9 +2,9 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchAllBookmarks } from "../actions/bookmarks";
-import ExportFile from "./ExportFile";
-import LoadingSpinner from "./LoadingSpinner";
+import { fetchAllBookmarks } from "../../actions/bookmarks";
+import ExportFile from "../ExportPage";
+import LoadingSpinner from "../LoadingSpinner";
 
 type Props = {
   bookmarks: Array<Object>,

@@ -2,10 +2,10 @@
 
 import React from "react";
 import { connect } from "react-redux";
-import NewTagForm from "../components/NewTagForm";
+import NewTagForm from "../NewTagForm";
 import { Link } from "react-router-dom";
-import { fetchTags, deleteTag } from "../actions/tags";
-import { setFilter } from "../actions/filters";
+import { fetchTags, deleteTag } from "../../actions/tags";
+import { setFilter } from "../../actions/filters";
 import styled from "styled-components";
 
 const StyledTagList = styled.div`

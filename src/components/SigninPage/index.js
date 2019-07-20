@@ -1,12 +1,11 @@
 //@flow
-
 import React from "react";
 
-type Props = {
-  signIn: Function
-};
+interface IProps {
+  signIn: () => void;
+}
 
-const SignIn = ({ signIn }: Props) => {
+const SignIn = ({ signIn }: IProps) => {
   return (
     <div className="empty">
       <h1>Better bookmarks</h1>

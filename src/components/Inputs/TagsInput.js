@@ -19,7 +19,7 @@ export const TagsInput = ({
       setOptions(response);
     };
     fetch();
-  }, []);
+  }, [userID]);
 
   return (
     <div className="form-group">
