@@ -7,10 +7,11 @@ import { signIn, signOut } from "../../actions/auth";
 import { searchQuery } from "../../actions/bookmarks";
 import { toggleDrawerMenu } from "../../actions/menuState";
 import Search from "../SearchBar";
+import { IAuth } from "../../types";
 import { StyledHeader, HeaderNav, HeaderTop, StyledNavLink } from "./styles";
 
 type Props = {
-  auth: Object,
+  auth: IAuth,
   signIn: () => void,
   signOut: () => void,
   toggleDrawerMenu: () => void

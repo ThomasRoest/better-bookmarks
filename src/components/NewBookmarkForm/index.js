@@ -8,22 +8,23 @@ import { connect } from "react-redux";
 import { createBookmark } from "../../actions/bookmarks";
 import { fetchTags } from "../../actions/tags";
 import { StyledForm } from "./styles";
+import { IBookmark, ITag, IAuth } from "../../types";
 
 type State = {
   title: string,
   url: string,
   tag: string,
   pinned: boolean,
-  errors: Object,
+  errors: {},
   isLoading: boolean,
-  params: null | Object
+  params: null | {}
 };
 
 type Props = {
-  createBookmark: (bookmark: Object) => void,
+  createBookmark: (bookmark: IBookmark) => void,
   createAlgoliaItem: () => void,
-  tagOptions: Array<Object>,
-  auth: Object,
+  tagOptions: ITag[],
+  auth: IAuth,
   fetchTags: (uid: string) => void
 };
 
