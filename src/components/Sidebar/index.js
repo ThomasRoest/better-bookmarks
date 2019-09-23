@@ -1,6 +1,6 @@
 //@flow
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchTags } from "../../actions/tags";
 import { queryByTag, fetchBookmarks } from "../../actions/bookmarks";
@@ -34,6 +34,8 @@ const Sidebar = ({
   queryByTag,
   fetchBookmarks
 }: IProps) => {
+  const [filter, setTagFilter] = useState("");
+
   useEffect(() => {
     fetchTags(auth.uid);
   }, [fetchTags, auth.uid]);
@@ -47,6 +49,8 @@ const Sidebar = ({
     fetchBookmarks(auth.uid);
     setFilter("default");
   };
+
+  const filteredTags = tags.filter(tag => tag.title.includes(filter));
 
   return (
     <StyledSidebar>
@@ -70,6 +74,15 @@ const Sidebar = ({
       </StyledActions>
       <StyledTagsList>
         <b>tags</b>
+        <div className="form-group">
+          <input
+            className="form-input"
+            type="text"
+            id="input-example-1"
+            placeholder="filter"
+            onChange={event => setTagFilter(event.target.value)}
+          />
+        </div>
         <li>
           <SidebarButton
             onClick={getAllBookmarks}
@@ -78,7 +91,7 @@ const Sidebar = ({
             All
           </SidebarButton>
         </li>
-        {tags.map(item => (
+        {filteredTags.map(item => (
           <SidebarButton
             key={item.id}
             title={item.title}
