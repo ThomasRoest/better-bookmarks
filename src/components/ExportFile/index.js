@@ -12,23 +12,23 @@ const StyledButton = styled.button`
 `;
 
 type Props = {
-  bookmarks: IBookmark[]
+  bookmarks: IBookmark[],
 };
 
 class ExportFile extends React.Component<Props> {
   exportData = () => {
     const { bookmarks } = this.props;
 
-    const exportedBookmarks = bookmarks.map(bookmark => {
+    const exportedBookmarks = bookmarks.map((bookmark) => {
       return { title: bookmark.title, url: bookmark.url, tag: bookmark.tag };
     });
 
     const blob = new Blob([JSON.stringify(exportedBookmarks)], {
-      type: "application/json;charset=utf-8"
+      type: "application/json;charset=utf-8",
     });
     FileSaver.saveAs(
       blob,
-      `better-bookmarks-export_${format(new Date(), "YYYY-MM-DD")}.json`
+      `better-bookmarks-export_${format(new Date(), "yyyy-MM-dd")}.json`
     );
   };
   render() {
@@ -40,9 +40,9 @@ class ExportFile extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    bookmarks: state.bookmarks
+    bookmarks: state.bookmarks,
   };
 };
 
