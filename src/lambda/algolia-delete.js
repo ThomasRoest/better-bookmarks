@@ -1,7 +1,7 @@
 var algoliasearch = require("algoliasearch");
 const dotenv = require("dotenv");
 
-dotenv.load();
+dotenv.config();
 
 var client = algoliasearch(
   process.env.REACT_APP_ALGOLIA_APP_ID,
@@ -23,10 +23,10 @@ exports.handler = async (event, context) => {
     return {
       headers: {
         "content-type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
       statusCode: 200,
-      body: `Deleted item from index`
+      body: `Deleted item from index`,
     };
   } catch (error) {
     return { statusCode: 500, body: error.toString() };
