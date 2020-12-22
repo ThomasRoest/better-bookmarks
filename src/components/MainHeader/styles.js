@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
 `;
 
 export const HeaderTop = styled.div`
-  background-color: #5755d9;
+  background-color: #3f51b5;
   display: flex;
   padding: 10px;
   max-width: 1000px;
