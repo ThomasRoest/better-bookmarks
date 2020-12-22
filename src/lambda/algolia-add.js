@@ -16,7 +16,8 @@ exports.handler = async (event, context) => {
   try {
     const bookmark = JSON.parse(event.body);
     var index = client.initIndex(`bookmarks-${bookmark.userId}`);
-    await index.addObjects([bookmark]);
+    const bookmarkWithObjectID = { ...bookmark, objectID: bookmark.id };
+    await index.saveObjects([bookmarkWithObjectID]);
     return {
       headers: {
         "content-type": "application/json",
