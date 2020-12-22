@@ -5,9 +5,10 @@ import {
   Hits,
   SearchBox,
   Highlight,
-  connectStateResults
+  connectStateResults,
 } from "react-instantsearch-dom";
 import { StyledSearch } from "./styles";
+import { algoliaSearchClient } from "../../algolia";
 
 const Bookmark = ({ hit }) => (
   <a href={hit.url}>
@@ -32,9 +33,8 @@ const Content = connectStateResults(({ searchState, searchResults }) => {
 const Search = ({ uid }) => (
   <StyledSearch>
     <InstantSearch
-      appId={process.env.REACT_APP_ALGOLIA_APP_ID}
-      apiKey={process.env.REACT_APP_ALGOLIA_SEARCH_KEY}
       indexName={`bookmarks-${uid}`}
+      searchClient={algoliaSearchClient}
     >
       <SearchBox />
       <Content />
@@ -44,7 +44,7 @@ const Search = ({ uid }) => (
 
 const mapStateToProps = ({ auth }) => {
   return {
-    uid: auth.uid
+    uid: auth.uid,
   };
 };
 
